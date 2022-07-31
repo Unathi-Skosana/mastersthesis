@@ -1,0 +1,763 @@
+\chapter{Preliminaries}
+\labelChapter{preliminaries}
+
+\begin{epigram}{\textit{Robert Gilmore, Alice in Quantumland: An Allegory of Quantum Physics}}
+    \enquote{Throughout the narrative you will find many statements that are obviously nonsensical and quite at variance with common sense. For the most part these are true.}
+\end{epigram}
+
+\noindent
+Readers acquainted with one of the main background texts~\cite{Mike&Ike, Dewolf_2019} may skip this chapter without a great reduction in their entropy; this chapter is primarily included for the sake of completeness and mainly bound up with spoils from the aforementioned texts.
+
+\section{Notation}
+\labelSection{notation}
+\lettrine[lines=3]{W}{e} begin by introducing some notation that we will repeatedly make use of throughout this thesis. The first piece of notation is the bra-ket notation, which provides a convenient way to notationally represent vectors in a complex vector space equipped with an inner product. An element of a $d$-dimensional complex vector space $V=\mathbb{C}^{d}$, in conventional notation is typically denoted as $\vec{v}$; in bra-ket notation such an element is denoted as $\ket{v}$. The symbol $\ket{\cdot}$ denotes a ket vector, called a ket for brevity.  The notation generalizes to infinite dimensional vector spaces, however, for our purposes we will only consider the former case. Sometimes, we will write $\ket{v}$ explicitly, similar to conventional vector notation as
+
+\begin{align}
+    \ket{v} = \mqty(v_1 \\ \vdots \\ v_d),
+\end{align}
+
+\noindent
+where $v_i \in \mathbb{C}$. Associated with the complex vector space $V$, there is a complex vector space called the dual vector space of $V$, and denoted by $V^{*}$. Elements of the dual vector space $V^{*}$ are linear maps $\phi$ that associate each element in $V$ to a number in $\mathbb{C}$, $\phi: V \to \mathbb{C}$. In bra-ket notation, the linear function $\phi$ is associated another symbol, which is denoted by $\bra{\cdot}$, called a bra vector, or simply called a bra. The action of the linear function on a element $v \in V$, in this notation is denoted as 
+
+\begin{align}
+	\phi_w(v) \to \bra{w}(\ket{v}) \equiv \braket{w}{v},
+\end{align}
+ 
+\noindent
+where $\braket{w}{v} \in \mathbb{C}$. In the case of $w \in \mathbb{C}^{d}$, a bra $\bra{w}$ is uniquely associated with the complex conjugate transpose of the element $w$,
+
+\begin{align}
+    \bra{w} = \left(\ket{w^{*}}\right)^\mathsf{T} = \mqty(\bar{w}_1 \\ \vdots \\
+    \bar{w}_d)^\mathsf{T} = \mqty(\bar{w}_1 & \ldots & \bar{w}_d),
+\end{align}
+
+\noindent
+where $*$ is element-wise complex conjugation, \ie for a complex $\alpha = a + i b \in \mathbb{C}$ with $a,b \in \mathbb{R}$, and $i = \sqrt{-1}$; the complex conjugate of $c$ is denoted by $\bar{c} = a - i b$. The symbol $(\cdot)^{\mathsf{T}}$ denotes the transpose, which transforms a column vector to row vector and \emph{vice versa} with the same entries. Often, we shall write the complex conjugate transpose with a dagger $\dagger$, that is,
+
+\begin{align}
+    \bra{\cdot} = \ket{\cdot^{*}}^\mathsf{T} \equiv \ket{\cdot}^{\dagger}.
+\end{align}
+
+\noindent
+Thus, for the finite-dimensional vector space $\mathbb{C}^{d}$, the linear map $\phi_w$ can take the form
+
+\begin{align}
+	\phi_w(v) = w^{\dagger}v = \braket{w}{v}= \bar{w}_1v_1 + \bar{w}_2v_2 + \cdots + \bar{w}_dv_d,
+\end{align}
+
+\noindent
+that is, $\phi$ is a linear function of the components of the vector $v$. Since we can associate a ket $\ket{v}$, uniquely with a bra $\bra{v}$, we can define an inner product on the vector space $V$. The inner product of two vectors $v,w \in V$ is a function that maps two vectors to a number in $\mathbb{C}$, $(\cdot,\cdot): V \times V \to \mathbb{C}$
+
+\begin{align}
+    (\ket{w}, \ket{v}) = \phi_w(v)  = \braket{w}{v} = \bar{w}_1v_1 + \bar{w}_2v_2 + \cdots + \bar{w}_dv_d.
+\end{align}
+
+\noindent
+The inner product imparts the notion of orthogonality on the vector space; two vectors $v,w \in V$ are said to be orthogonal if $\braket{w}{v} = 0$. Furthermore, the inner product imparts a notion of length on the vector space by inducing a norm $\norm{\cdot}: V \to [0, \infty)$ on $V$. For a $v \in V$, the norm is defined in terms of the inner product as 
+
+\begin{align}
+	\norm{v} = \sqrt{\braket{v}{v}}.
+\end{align}
+
+\noindent
+Subsequently, the norm imparts a notion of distance on the vector space; a distance metric $d : V \times V \to [0, \infty)$
+
+\begin{align}
+	\norm{v - w} = \sqrt{\braket{v-w}{v-w}},
+\end{align}
+
+\noindent
+for $v, w \in V$. A vector space $V$ equipped an inner product $(\cdot, \cdot)$ is called a Hilbert space, specially denoted by $\mathcal{H}$.  The Hilbert space is where quantum states live.
+
+\section{Quantum mechanics}
+Max Planck's postulates about then mysterious spectrum of black body radiation in terms of discrete energy quanta, was the cock's crow of the physical theory we know today as quantum mechanics. Since then, quantum mechanics has achieved acclaimed status as one of the most successful physical theories in accounting for phenomena at the atomic and subatomic scales. Unsurprisingly, the theory of quantum mechanics is at the foundation of quantum computation. This sections describes the necessary and minimal background from the theory of quantum mechanics relevant for quantum computing.
+ 
+\bigskip
+\noindent 
+
+\subsection{States}
+The state of a physical quantum system, isolated from its immediate environment, is mathematically described by a unit vector in a Hilbert space $\mathcal{H}$\cite{Mike&Ike}. The simplest non-trivial physical quantum system is a two-state quantum system, the state of such a system can preoccupy two distinct states. The state of a two-state quantum system is described by a unit vector in a two-dimensional Hilbert space $\mathcal{H} = \mathbb{C}^2$, often, the two distinct states are denoted as $\ket{0}$ and $\ket{1}$. The states $\ket{0},\ket{1}$ form an orthonormal basis for the Hilbert space, hence a general state $\ket{\psi}$ in such a vector space be written as,
+
+\begin{align}
+	\ket{\psi} = \alpha\ket{0} + \beta \ket{1} =\alpha \mqty(1 & 0)^{\mathsf{T}} + \beta \mqty(0  & 1)^{\mathsf{T}}.
+	\labelEquation{qubit}
+\end{align}
+
+\noindent
+where $\alpha, \beta \in \mathbb{C}$, and we enforce the condition $\abs{\alpha}^2 + \abs{\beta}^2 = 1$, such that $\braket{\psi}{\psi} = 1$. The spanning coefficients $\alpha$ and $\beta$ are called amplitudes of  states $\ket{0}$ and $\ket{1}$, respectively. Such a mathematical abstraction of a two-state quantum system is called a quantum bit or simply \enquote{qubit}, analogous to the bit, which is the most basic information carrying unit of information in classical computation and can only preoccupy either one of two possible states. Similarly, a qubit is the most basic information carrying unit in quantum computation and information. In the nomenclature of quantum computation and information, the orthonormal basis $\{\ket{0},\ket{1}\}$ is called the computational basis, and elements of this basis are called computation basis states. One of the peculiarities of a qubit, which makes it distinct from its classical counterpart is a direct consequence of~\refEquationOnly{qubit}; which suggests that in addition to the two states $\ket{0},\ket{1}$, such a two-state system can occupy a continuum of states that are not either $\ket{0}$ nor $\ket{1}$ but a linear combination of these states. This strange, and somehow counterintuitive property is called superposition.
+
+
+\bigskip
+\noindent
+The constraint $\ip{\psi}=1$, which implies that $\ket{\psi}$ is a unit vector in a two-dimensional Hilbert space, gives a useful way to geometrically visualize the state of a qubit. For real numbers $\theta$ and $\varphi$, a general pure state of a qubit can be written as 
+
+\begin{align*}
+	\ket{\psi} = e^{i\gamma}\cos{\frac{\theta}{2}}\ket{0} +
+		e^{i\varphi}
+	\sin{\frac{\theta}{2}}\ket{1}, \quad 0 \leq \theta \leq \pi, 0 \leq
+	\varphi < 2\pi, \gamma \in \mathbb{R}.
+\end{align*}
+
+\noindent
+The parameters $\theta$ and $\varphi$ represent a point on the sphere of a ball
+in $\mathbb{R}^3$ with unit radius, called a Bloch sphere as shown in~\refFigureOnly{bloch_sphere}.
+
+\bigskip
+\noindent
+The Hilbert space $\mathcal{H} = \mathbb{C}^{2}$ can be spanned by some other orthonormal basis other than $\{\ket{0},\ket{1}\}$. Sometimes, it might instructive or convenient to write a general qubit state $\ket{\psi}$ in a different basis. Common bases include the Pauli-$X$ basis denoted by $\{\ket{+}, \ket{-}\}$
+
+\begin{align*}
+	\ket{\pm} = \frac{\ket{0} \pm \ket{1}}{\sqrt{2}}; \quad \ket{\pm} = \mqty(1/\sqrt{2}, \pm 1/\sqrt{2})^{\mathsf{T}},
+\end{align*}
+
+\noindent
+and the Pauli-$Y$ basis denoted by $\{\ket{+i}, \ket{-i}\}$
+
+\begin{align*}
+	\ket{\pm i} = \frac{\ket{0} \pm i\ket{1}}{\sqrt{2}}; \quad \ket{\pm i} = \mqty(1/\sqrt{2}, \pm i/\sqrt{2})^{\mathsf{T}},
+\end{align*}
+
+\noindent
+where $i = \sqrt{-1}$.
+
+\begin{figure}[t!]
+	\centering
+	\def\rotationSphere{-125}
+	\def\tiltSphere{20}
+	\def\radiusSphere{2.5cm}
+	\def\psiLat{45}
+	\def\psiLon{65}
+
+
+	\begin{blochsphere}[radius=\radiusSphere, color={platinum}, opacity=0.05, rotation=\rotationSphere,tilt=\tiltSphere]
+
+	\drawBallGrid[style={opacity=.03}]{30}{45}
+
+
+	\drawLongitudeCircle[style={on layer=back,color=platinum,opacity=.5}]{90}
+	\drawLongitudeCircle[style={on layer=back,platinum}]{0}
+	\drawLatitudeCircle[style={on layer=back,platinum}]{0}
+
+	% Define the different points on the bloch sphere
+	\labelLatLon{ket0}{90}{0};
+	\labelLatLon{ket1}{-90}{0};
+	\labelLatLon{ketminus}{0}{180};
+	\labelLatLon{ketplus}{00}{0};
+	\labelLatLon{ketpluspi2}{0}{-90};  % Longitude seems to be defined in the "wrong" direction, hence the minus
+	\labelLatLon{ketplus3pi2}{0}{-270};
+	\labelLatLon{psi}{\psiLat}{-\psiLon};
+
+	% Draw and label the axis
+	\draw[-,dashed,fill opacity=.5, text opacity=1] (0,0) -- (ket1);
+
+	\draw[-,color=black,fill opacity=.5, text opacity=1] (0,0) -- (ket0) node[inner sep=1.0mm, xshift=-5, yshift=12] at (ket0) {\footnotesize $z$};
+
+	\draw[dashed,-,color=black,fill opacity=.5, text opacity=1] (0,0) -- (ketminus);
+
+	\draw[-, color=black, fill opacity=.5, text opacity=1] (0,0) -- (ketplus) node[inner sep=25.0mm, xshift=-12, yshift=-4.5] at (ketplus) {\footnotesize $x$};
+
+	\draw[-,color=black, fill opacity=.5, text opacity=1] (0,0) -- (ketpluspi2) node[inner sep=1.0mm, yshift=-10, xshift=5] at (ketpluspi2) {\footnotesize $y$};
+
+	\draw[dashed,-,text opacity=1, fill opacity=.5] (0,0) -- (ketplus3pi2);
+
+	% \draw[-latex] (ketpluspi2) -- +(-20:0.35);
+	% \draw[-latex] (ketplus) -- +(225:0.35);
+	% \draw[-latex] (ket0) -- +(90:0.35);
+
+	\node[pole] at (ket0) {};
+	\node[pole] at (ket1) {};
+	\node[pole] at (ketplus) {};
+	\node[pole] at (ketminus) {};
+	\node[pole] at (ketplus) {};
+	\node[pole] at (ketpluspi2) {};
+	\node[pole] at (ketplus3pi2) {};
+
+	% Draw |psi>
+	\draw[-latex] (0,0) -- (psi) node[above]{\footnotesize $\ket{\psi}$};
+
+	% % Draw the angles
+	\coordinate (origin) at (0,0);
+	{
+		% Will draw the angle/projection one the equatorial plane
+		\setDrawingPlane{0}{0}
+		% Draw the projection: cos is used to compute the length of the projection
+		\draw[current plane,dashed] (0,0) -- (-90+\psiLon:{cos(\psiLat)*\radiusSphere}) coordinate (psiProjectedEquat) -- (psi);
+		% Draw the angle
+		\pic[current plane, draw,fill=pinegreen,fill opacity=.25, text opacity=1,"\footnotesize $\phi$", angle eccentricity=2.2]{angle=ketplus--origin--psiProjectedEquat};
+	}
+	{ \setLongitudinalDrawingPlane{-\psiLon}
+		% Draw the angle
+		\pic[current plane, draw,fill=pinegreen,fill opacity=.25, text opacity=1,"\footnotesize $\theta$", angle eccentricity=1.5]{angle=psi--origin--ket0};
+	}
+	\end{blochsphere}
+	\caption{Visualization of the state of a qubit as a unit vector in $\mathbb{R}^3$}
+	\labelFigure{bloch_sphere}
+\end{figure}
+
+
+\subsection{Evolution}
+A completely isolated physical quantum system is an idealization, not only that but such a system would be uninteresting, as its state will never change, and an external observer would have no way to access it which \emph{ipso facto} would present a sizeable challenge if we ever to hope do any meaningful information processing. In reality, however, such an idealization does not hold, quantum system have dynamics and evolve over time.  Mathematically, the dynamics of an isolated\footnote{Isolated here includes whatever is instigating the dynamics, \ie a laser pulse causing a transition between energy levels of a hydrogen atom.} quantum state are described by a special kind of linear operator defined on the Hilbert space of the quantum state. A linear operator $U: V \to V$ defined on the Hilbert space $\mathcal{H}$ is a linear operator such that for a general ket vector $\ket{\psi} = \displaystyle\sum_{i}\alpha_i\ket{v_i} \in \mathcal{H}$,
+
+\begin{align}
+    \ket{\psi'}= U\ket{\psi}=U\left(\displaystyle\sum_{i}\alpha_i\ket{v_i}\right) =
+    \displaystyle\sum_{i}U(\alpha_i \ket{v_i}) =
+    \displaystyle\sum_{i}\alpha_i U\ket{v_i},
+\end{align}
+
+\noindent
+for all $\ket{v_i} \in \mathcal{H}$ and $\alpha_i \in \mathbb{C}$ and $\ket{\psi'} \in \mathcal{H}$. i.e The linear operator acts on a quantum state and maps it to another quantum state.
+
+\bigskip
+\noindent
+Hence, formally stated --- the evolution of the state of an isolated quantum system over time is described by a unitary transformation~\cite{Mike&Ike}. That is, the state of a quantum system at the present time $\ket{\psi}$ and at a later time $\ket{\psi'}$ is described by a linear operator defined on $\mathcal{H}$. Why unitary ? Recall that we imposed the constraint that the quantum states are described by unit vectors in $\mathcal{H}$, hence it must be that $\ip{\psi} = \ip{\psi'}=1$ which implies that the linear map $U$ must be preserve the norm defined on the space. Norm-preserving linear operators are called unitary operators. The inverse of a unitary operator $U$ is the same as its complex conjugate transpose $U^{\dagger}$, \ie $U^{\dagger}U = U^{\dagger}U= 1$ since 
+
+\begin{align}
+	\ip{\psi'} &= (U\ket{\psi})^{\dagger}U\ket{\psi} = \ket{\psi}^{\dagger}U^{\dagger}U\ket{\psi} = \bra{\psi}U^{\dagger}U\ket{\psi}
+\end{align}
+
+\noindent
+Since it must be that $\ip{\psi}=\ip{\psi'}$, the last expression implies $U^{\dagger} U = \mathds{1}$. Hence, a unitary operator $U$ always has an inverse and hence the evolution over time of an isolated system is always reversible.
+
+\clearpage
+\noindent
+For a single qubit, unitary operators are represented by square complex matrices, and their action on a qubit can be visually presented as rotations on the Bloch sphere shown in~\refFigureOnly{bloch_sphere}. 	Perhaps, the most prevalent example of such unitary operators for a single qubit are the Pauli matrices, $\sigma_x, \sigma_y, \sigma_z$ and the identity matrix $\mathds{1}$
+
+\begin{align*}
+	\mathds{1} = \mqty(1 & 0 \\ 0 & 1) \quad \sigma_1 \equiv X = \mqty(0 & 1 \\ 1 & 0) \\
+	\quad \sigma_2 \equiv Y = \mqty(0 & -i \\ i & 0) \quad \sigma_3 \equiv Z = \mqty(1 & 0 \\ 0 & -1).
+\end{align*}
+
+\noindent
+The action of each of the above gates on a general qubit state $\ket{\psi}$ are given by
+
+\begin{align*}
+	X(\alpha \ket{0} + \beta\ket{1}) &= \alpha\ket{1} + \beta\ket{0}, \\
+	Y(\alpha \ket{0} + \beta\ket{1}) &= i(\alpha\ket{1} - \beta\ket{0}), \\
+	Z(\alpha \ket{0} + \beta\ket{1}) &= \alpha\ket{0} - \beta\ket{1}. \\
+\end{align*}
+
+\noindent
+Hence, the Pauli-$X$ gate is called a NOT gate analogous to the classical NOT gate since it swaps around $\ket{0}$ and $\ket{1}$, the Pauli-$Z$ gate is called the phase flip gate since it puts a negative phase on $\ket{1}$, and Pauli-$Y$ gate ($Y=ZX$) gate performs both of these operators in sequence. The Pauli matrices have many useful algebraic properties:
+
+\begin{align*}
+	\sigma_i^{\dagger} = \sigma_{i}^{-1} = \sigma_i &\quad \text{Hermitian and unitary}, \\
+	\acomm{\sigma_i}{\sigma_j} = 2\delta_{ij} \mathds{1} &\quad \text{Mutually anti-commutation}, \\
+	\comm{\sigma_i}{\sigma_j} = 2i \varepsilon_{jkl}\sigma_l &\quad \mathfrak{su}(2) \text { Lie algebra}.
+\end{align*}
+
+\noindent
+where $\varepsilon_{jkl}$ is the Levi-Civita symbol, $\acomm{A}{B} = AB + BA$ and $\comm{A}{B} = AB - BA$ denote anti-commutator and commutator, respectively. Prominently, a single qubit rotation by angle $\theta$ around an axis $\hat{n}$ can be written as an exponential of Pauli matrices
+
+\begin{align}
+	\labelEquation{single_qubit_rotation}
+	R_{\hat{n}}(\theta)= e^{- i \frac{\theta}{2} \hat{n} \cdot \vec{\sigma}} = \cos{\frac{\theta}{2}} - i \sin{\frac{\theta}{2}} (n_x X + n_y Y + n_z Z),
+\end{align}
+
+\noindent
+where $\hat{n} = (n_x, n_y, n_z)$ and $\vec{\sigma} = (X, Y, Z)$. Common examples of rotations are rotations around the $x,y$ and  $z$ axes of the Bloch sphere
+
+\begin{align}
+	R_x(\theta) &= \cos{\frac{\theta}{2}} - i \sin{\frac{\theta}{2}} X = \mqty(\cos{\frac{\theta}{2}} & -i\sin{\frac{\theta}{2}} \\ -i\sin{\frac{\theta}{2}} & \cos{\frac{\theta}{2}}), \nonumber \\
+	R_y(\theta) &= \cos{\frac{\theta}{2}} - i \sin{\frac{\theta}{2}} Y = \mqty(\cos{\frac{\theta}{2}} & -\sin{\frac{\theta}{2}} \\ \sin{\frac{\theta}{2}} & \cos{\frac{\theta}{2}}), \nonumber \\
+	R_z(\theta) &= \cos{\frac{\theta}{2}} - i \sin{\frac{\theta}{2}} Z = \mqty(e^{-i\frac{\theta}{2}} & 0 \\ 0 & e^{i\frac{\theta}{2}}).
+\end{align}
+
+\noindent
+Similar to three-dimensional Euclidean space, an arbitrary qubit rotation can be decomposed into three successive rotations around two non-parallel axes $\hat{n}$ and $\hat{m}$, $\hat{n} \cdot \hat{m} \neq \pm 1$
+
+\begin{align*}
+	U = e^{i\alpha} R_{\hat{n}}(\beta)R_{\hat{m}}(\gamma)R_{\hat{n}}(\delta), \quad \alpha, \beta, \gamma, \delta \in \mathbb{R}.
+\end{align*}
+
+\noindent
+In $\mathbb{R}^3$, the angles $\beta, \gamma, \delta$ are the so-called Euler angles. Other ubiquitous and note-worthy single unitary operators are the Hadamard $H$, Phase $S$, and $T$ gates; as matrices they are written as
+
+\begin{align*}
+	H &= R_{x}(\pi/2)R_{z}(\pi/2)R_x(\pi/2) = \frac{1}{\sqrt{2}}\mqty(1 & 1 \\ 1 & -1), &\quad R_{\phi} = e^{-i\frac{\pi}{2}}R_z(\phi) = \mqty(1 & 0 \\ 0 & e^{i\phi}), \\ 
+	T &=  e^{-i\frac{\pi}{8}}R_{\pi/4} = \mqty(1 & 0 \\ 0 & e^{i\frac{\pi}{4}}), &\quad S = R_{\pi/2} = \mqty(1 & 0 \\ 0 & i).
+\end{align*}
+
+\noindent
+Perhaps, the most note-worthy among these is the Hadamard gate $H$, which operates on the basis states $\ket{0}, \ket{1}$ to give a uniform superposition of the two basis states $\ket{+}, \ket{-}$, respectively (and \emph{vice versa}). 
+
+
+\subsection{Measurements}
+\begin{epigram}{\textit{Ulf Leonhardt, Measuring the Quantum State of Light}}
+	\enquote{We cannot see the things as they are. What we do see are only the different aspects of a quantum object, the `quantum shadows' in the sense of Plato’s famous parable.}
+\end{epigram}
+
+\noindent
+In addition to dynamics being a prerequisite for doing any meaningful information processing with physical quantum systems, being able to extract useful information from the system at the end of any information processing task is vital, as such information can be useful in the characterization and assessment of the success of the said information processing task. At the onset, we are confronted with the situation that the very act of measuring a quantum system by observation by however means, implies the system is no longer isolated, making the evolution of a quantum system under measurement no longer unitary.
+
+\bigskip
+\noindent
+Formally stated in the standard text~\cite{Mike&Ike} --- quantum measurements are described by a collection $\{M_m\}$ of Hermitian operators~\footnote{A Hermitian operator $H$ is a linear operator that is equal to its own complex conjugate transpose $H^{\dagger} = H$.}, called measurement operators. The set $\{m\}$ is the set of all possible measurement outcomes that may occur in the experiment. Which outcome occurs? We can never determine in advance, but rather each outcome $m$ occurs with a probability $p(m)$. A measurement operator describes the evolution of the system undergoing a measurement, if the state of a quantum system is $\ket{\psi}$ immediately before the measurement, then state after the measurement $\ket{\psi'}$ if the outcome $m$ is obtained is given by
+
+\begin{align}
+	\ket{\psi'} = \frac{M_m\ket{\psi}}{\sqrt{p(m)}},
+\end{align}
+
+\noindent
+where $p(m) = \ev{M^{\dagger}_m M_m}{\psi}$, the denominator ensures that $\ip{\psi}=1$. The probability that we will obtain an outcome whatever it may be is unity, \ie $\sum_{m} p(m) = 1$. Hence
+
+\begin{align*}
+	\displaystyle\sum_{m} p(m) &= \displaystyle\sum_{m} \ev{M_m^{\dagger}M_m}{\psi}, \\
+											   &= \ev{\displaystyle\sum_{m} M_m^{\dagger}M_m}{\psi} = 1 = \ip{\psi} \implies \sum_{m}M^{\dagger}_m M_m = \mathds{1}.
+\end{align*}
+
+\clearpage
+\noindent
+The measurement operators are therefore said to satisfy a completeness relation. A particular example of a measurement operators we will refer to throughout this thesis, are the measurement operators of the computational basis $\{M_0, M_1\} = \{\ket{0}\bra{0}, \ket{1}\bra{1}\}$, corresponding to the two possible outcomes $\{0, 1\}$. On a general state written in the basis $\{\ket{0}, \ket{1}\}$,
+
+\begin{align}
+	\ket{\psi} = \alpha\ket{0} + \beta \ket{1},
+\end{align}
+
+\noindent
+the probabilities that we obtain the outcomes $m=0$ and $m=1$ are given by $p(0) = |\alpha|^2$ and $p(1) = |\beta|^2$, respectively. The respective states directly after measurements are given by 
+
+\begin{align*}
+	\frac{M_0 |\psi\rangle}{\sqrt{p(0)}} = \frac{\alpha}{|\alpha|} |0\rangle; 
+	\quad \frac{M_1 |\psi\rangle}{\sqrt{p(1)}} = \frac{\beta}{|\beta|} |1\rangle
+\end{align*}
+
+\noindent
+The numbers $\frac{\alpha}{|\alpha|}, \frac{\beta}{|\beta|}$ corresponding to
+phases of the form $e^{i\theta}$ with modulus $1$, and have no physical significance since they do not influence the measurement probabilities. For instance, if $\ket{\psi'}$ differs from $\ket{\psi}$ by a global phase $e^{i\theta}$, then probability of measuring an outcome $m$ on $\ket{\psi'}$ after a measurement is given by
+
+\begin{align}
+	p(m) = \expval{M^{\dagger}_mM_m}{\psi'} = \expval{e^{-i\theta}M^{\dagger}_m M_m e^{i\theta}}{\psi} = \expval{M^{\dagger}_m M_m}{\psi}.
+\end{align}
+
+\noindent
+Given the ability to perform any arbitrary single qubit unitary operation together with the ability to perform a computational basis measurement, it is possible to perform a measurement in any arbitrary basis. To perform a measurement in an arbitrary basis $\{\ket{v_0}, \ket{v_1}\}$, we can first apply a unitary operator $U$ such that $\{U\ket{v_0} = \ket{1}, U\ket{v_1}= \ket{1}\}$, and perform a measurement in the computational basis. For instance, an $X$ basis $\{\ket{+}, \ket{-}\}$ measurement can be performed in this way by first applying the Hadamard gate $H$, taking $H\ket{+}=\ket{0}$ and $H\ket{-}=\ket{1}$, respectively, then a computational basis measurement.
+
+\bigskip
+\noindent
+The measurement operators on $\mathcal{H}$, such as those of the computational basis, belong to a special class of measurement operators called projectors, and the corresponding measurements are called projective measurements~\cite{Mike&Ike}. Such measurement are said to be projective because their action is to project a quantum state onto a subspace of the Hilbert space. As we have seen for computational basis measurements, which project a general state onto either $\ket{0}$ or $\ket{1}$. Projective measurements are associated with Hermitian operators or observables on $\mathcal{H}=\mathbb{C}^2$; since a Hermitian operator $O$ is also a normal operator, \ie $\comm{O}{O^{\dagger}} = \comm{O}{O} =  0$. Hence $O$ has a spectral decomposition
+
+\begin{align}
+	O = \displaystyle\sum_{i} m \ket{v_m}\bra{v_m},
+\end{align}
+
+\noindent
+where $m \in \mathbb{R}$ are eigenvalues corresponding to the eigenvectors $\ket{v_i}$. For a Hermitian operator $O$, the eigenvectors can be chosen to form complete orthonormal basis for $\mathcal{H}$, with mutually orthonormal basis states $\braket{v_i}{v_j} = \delta_{ij}$. The action of the operators $P_m = \ket{v_m}\bra{v_m}$ on quantum state is to project onto a eigenspace associated with the eigenvalue $m$ of the Hermitian operator $O$, hence their name. 
+
+\clearpage
+\noindent
+Choosing the measurement operators as $M_m \equiv P_m = \ket{v_m}\bra{v_m}$ is a valid choice; the projectors $P_m$ are Hermitian and satisfy the completeness relations since the basis $\{\ket{v_m}\}$ forms a complete basis for $\mathcal{H}$. Furthermore, as a consequence of orthonormality of the basis, the projectors $P_m$ are mutually orthogonal, that is, $P_mP_{m'} = \delta_{m,m'} P_m$. The action of a projector $P_m$ on a general state $\ket{\psi}$ is given by, 
+
+\begin{align}
+	\ket{\psi'} = \frac{P_m\ket{\psi}}{p(m)},
+\end{align}
+
+\noindent
+where $p(m) = \expval{P_m}{\psi}$. The computational basis measurement $\{\ket{0}\bra{0},\ket{1}\bra{1}\}$ is an example of a projective measurement, and the corresponding observable is the Pauli $Z$ matrix. Similarly, for the $X$ basis measurement $\{\ket{+}\bra{+}, \ket{-}\bra{-}\}$, the corresponding observable is the Pauli $X$ matrix. In summary,
+
+\begin{align}
+	Z &= 1 \ket{0}\bra{0} - 1 \ket{1}\bra{1}, \\
+	X &= 1 \ket{+}\bra{+} - 1 \ket{-}\bra{-}.
+\end{align}
+
+\bigskip
+\noindent
+Projective measurements have properties that make them appealing in an experimental scenario, for instance, we can easily calculate the expected value or mean value of the projective measurements with respect to a general state $\ket{\psi}$,
+
+\begin{align}
+	\mathbb{E}[O] \equiv \expval{O} &= \displaystyle\sum_{m} m p(m), \nonumber \\
+	&= \displaystyle\sum_{m} m \expval{P_m}{\psi}, \nonumber \\
+	&= \expval{\displaystyle\sum_m m P_m}{\psi}, \nonumber \\
+	&= \expval{O}{\psi}.
+\end{align}
+
+\noindent
+Similarly, the statistical spread of the projective measurement or variance can be written in terms of $\expval{O}$ as
+
+\begin{align}
+	\sigma(O)^2 = \expval{(O - \expval{O})^2} = \expval{O^2} - \expval{O}^2.
+\end{align}
+
+\subsection{Multiple systems}
+Hitherto, in everything we have discussed we only made reference to a single quantum system, in the case of a two-state system, its state belongs to a two-dimensional Hilbert space $\mathcal{H}$. In some scenarios, we may be interested in a collective quantum system made up of $n$ distinct physical systems with the state of each in a distinct Hilbert space $\mathcal{H}_i$, for instance the collective quantum system of multiple distinct qubits interacting amongst each other. How do we describe the collective state of a such a system? The tensor product provides a way to construct a new Hilbert space composed up of two other Hilbert spaces in a natural way~\cite{Mike&Ike}. 
+
+\bigskip
+\noindent
+If the state space of system A is the Hilbert space $\mathcal{H}_1$ and the state space of system B is the Hilbert space $\mathcal{H}_2$, then joint state space of system AB is the Hilbert space $\mathcal{H}_1\otimes\mathcal{H}_2$. 
+
+\clearpage
+\noindent
+This Hilbert space is formed by all possible pairs of basis elements of each space of the form $\{\ket{v_i}\otimes\ket{w_j}\}$, where $\{v_i\}$ and $\{w_j\}$ is an orthonormal basis for $\mathcal{H}_1$ and $\mathcal{H}_2$, respectively. Hence, the dimension of the Hilbert space $\mathcal{H}_1\otimes\mathcal{H}_2$ is the product of the dimensions of the individual Hilbert spaces. An element of the collective Hilbert space $\mathcal{H}_1\otimes\mathcal{H}_2$ is written as
+
+\begin{align}
+	\ket{\psi} = \displaystyle\sum_{i,j} \alpha_{i,j} \ket{v_i} \otimes \ket{v_j},
+\end{align}
+
+\noindent
+and inner product on $\mathcal{H}_1\otimes\mathcal{H}_2$ is defined by
+
+\begin{align}
+	(\ket{v}\otimes\ket{w}, \ket{p}\otimes\ket{q}) = \bra{v}\otimes\bra{w} (\ket{p}\otimes\ket{q}) \equiv \braket{v}{p}\braket{w}{q},
+\end{align}
+
+\noindent
+the product of the inner products defined on each Hilbert space. For the sake of brevity whenever there is no risk of ambiguity we will write $\ket{v}\otimes\ket{w}$ as $\ket{v}\ket{w}$ or $\ket{v,w}$. The notion of constructing a larger Hilbert space to describe the state of a collective quantum system by taking the tensor product of the Hilbert spaces of each constituent system generalizes to an arbitrary number of systems. The joint state of a collective system made up of $n$ constituent systems in the state $\ket{\psi_i}$ is given by $\ket{\psi_1}\otimes\ket{\psi_2} \otimes \cdots \otimes \ket{\psi_n}$.
+
+
+\bigskip
+\noindent
+Again, returning to the two-state quantum system, consider an example of two-qubit state $\ket{\phi} \in \mathbb{C}^4$, composed of system A in the state $\ket{\psi_1} \in \mathbb{C}^2$ and system B in the state $\ket{\psi_2} \in \mathbb{C}^2$, with
+
+\begin{align*}
+	\ket{\psi_1} &= \alpha_1\ket{0}_1 + \beta_1\ket{1}_1, \\
+	\ket{\psi_2} &= \alpha_2\ket{0}_2 + \beta_2\ket{1}_2 .
+\end{align*}
+
+\noindent
+The joint state $\ket{\theta}$ can be constructed by taking the Kronecker product
+of the two states of the individual systems
+
+\begin{align}
+    \ket{\theta} &= \ket{\psi_1}\otimes\ket{\psi_2}, \nonumber \\
+                &= \alpha_1\ket{0}_1\otimes(\alpha_2\ket{0}_2 +
+                \beta_2\ket{1}_2) + \beta_1\ket{1}_1\otimes(\alpha_2\ket{0}_2 +
+                \beta_2\ket{1}_2),\nonumber \\
+                &= \alpha_1\alpha_2\ket{0}_1\otimes\ket{0}_2 +
+                \alpha_1\beta_2\ket{0}_1\otimes\ket{1}_2 +
+                \alpha_2\beta_1\ket{1}_1\otimes\ket{0}_2 +
+                \beta_1\beta_2\ket{1}_1\otimes\ket{1}_2,\nonumber \\
+                &= \alpha_1\alpha_2\mqty(1 \\ 0 \\ 0 \\ 0) +
+                \alpha_1\beta_2\mqty(0 \\ 1 \\ 0 \\ 0) +
+                \alpha_2\beta_1\mqty(0 \\ 0 \\ 1 \\ 0) +
+                \beta_1\beta_2\mqty(0 \\  0 \\ 0 \\ 1).
+\end{align}
+
+\bigskip
+\noindent
+Linear operators defined on a single Hilbert space can be extended in a similar manner; if the operators $O_1, \cdots ,O_n$ are defined on $\mathcal{H}_1,\cdots,\mathcal{H}_n$ respectively, then the operator $O_1 \otimes \cdots \otimes O_n$ is defined on $\mathcal{H}_1\otimes \cdots \otimes \mathcal{H}_n$ as 
+
+\begin{align}
+	O_1 \otimes \cdots \otimes O_n (\ket{\psi_1} \otimes \cdots \otimes \ket{\psi_n}) \equiv (O_1\ket{\psi})\otimes \cdots \otimes(O_n\ket{\psi_n}).
+\end{align}
+
+
+\clearpage
+\noindent
+Additionally, an operator $O_i$ acting on a $\mathcal{H}_i$ can be extended to act on a joint Hilbert space $\mathcal{H}_1\otimes \cdots \otimes\mathcal{H}_n$ by defining it as 
+
+\begin{align}
+	O_i(\ket{\psi_1}\otimes\cdots\otimes\ket{\psi_i}\otimes\cdots\otimes\ket{\psi_n}) \equiv \nonumber \\ (\mathds{1}_1\ket{\psi_1})\otimes\cdots\otimes (O_i\ket{\psi_i})\otimes\cdots\otimes(\mathds{1}_n\ket{\psi_n}), 
+\end{align}
+
+\noindent
+which acts on the joint Hilbert space, but has a non-trivial effect only on the respective Hilbert space $\mathcal{H}_i$. Whenever there is a possibility of ambiguity, such as with single qubit rotations with a subscript, \ie $R_{n}(\theta)$, the subscript used to denote separate Hilbert spaces will be upgraded to a superscript denoted as $R^{(i)}_{n}(\theta)$.
+
+\subsection{Quantum non-separability}
+\labelSection{quantum_non_separability}
+\noindent
+In addition to the phenomena of superposition, another phenomena inherently quantum mechanical and associated with composite quantum systems is the phenomena of entanglement, and a staple of quantum advantage in many quantum information processing tasks. A joint quantum system is said to possess entanglement if its quantum state cannot be written as a product state of the states of its individual subsystems, \ie non-separable --- the individual subsystems are do not have a definite state, but only collectively when describe it by referencing to the state of the other subsystem. 
+
+\bigskip
+\noindent
+Consider a joint Hilbert space $\mathcal{H} = \mathcal{H}_a \otimes \mathcal{H}_b$. A pure state $\ket{\psi}$ is said to be separable if it can be written as a product state of the form $\ket{\psi} = \ket{\psi}_a \otimes \ket{\psi}_b$ for $\ket{\psi}_a \in \mathcal{H}_a$ and $\ket{\psi}_b \in \mathcal{H}_b$. Similarly, a density matrix $\varrho$ is separable if it can be written as a convex sum of product states $\varrho = \sum_{j} p_j \varrho_j \otimes \varrho_j$, where $p_j \geq 0$ and $\sum_{j} p_j = 1$~\cite{Peres_1996}. If a quantum system is not separable under the above criteria, it is said to be entangled or non-separable. A two-qubit system is the smallest system that is capable of exhibiting entanglement; the Bell states are the only maximally entangled two-qubit states.
+
+\begin{align}
+	\ket{\Phi^+}   &= \frac{1}{\sqrt{2}} \left(\ket{0,0} + \ket{1,1}\right), \nonumber \\
+	\ket{\Phi^-}   &= \frac{1}{\sqrt{2}} \left(\ket{0,0} - \ket{1,1}\right),\nonumber \\
+	\ket{\Psi^{+}} &= \frac{1}{\sqrt{2}} \left(\ket{0,1} + \ket{1,0}\right), \nonumber \\
+	\ket{\Psi^{-}} &= \frac{1}{\sqrt{2}} \left(\ket{0,1} - \ket{1,0}\right).
+\end{align}
+
+\noindent
+Another important example of a maximally-entangled state is the three-qubit \acs{GHZ} state
+
+\begin{align}
+	\ket{\psi_\text{GHZ}} = \frac{1}{\sqrt{2}}(\ket{0,0,0} + \ket{1,1,1}).
+\end{align}
+
+\noindent
+The above states are said to be maximally-entangled with respect to some entanglement measure. Unfortunately, there is no general-purpose measure of entanglement that fits all the sundry scenarios. We briefly outline a few ways used to characterized the presence of entanglement (albeit not true entanglement measures) in a quantum system in this thesis and refer the interested reader to the Refs.~\cite{Plenio_2005,Horodecki_2009} for a detailed treatment of this subject.
+
+\paragraph{Bell-CHSH violations}
+\noindent
+Formulated by \gls{CHSH}, the Bell-\acs{CHSH} inequality imposes necessary conditions on the measured correlations from an arbitrary two-qubit state, under the local realism of classical local hidden variable theories, and shows that quantum mechanics can violate such conditions~\cite{CHSH_1969}. The canonical Bell-\acs{CHSH} inequality asserts that, for any local hidden variable theory $\abs{S} \leq 2$ where 
+
+\begin{align}
+	S = E(x,y) - E(x,y') + E(x',y) + E(x',y'),
+\end{align}
+
+\noindent
+where $x,y,x'$ and $y'$ are different measurement bases and $E(x,y)$ is the corresponding correlation measurement in the joint basis $x, y$. If the $E(x,y)$ are quantum correlations, then quantum mechanics violates the aforesaid condition achieving a possible maximum of $\abs{S} = 2 \sqrt{2}$. The description in Ref.~\cite{HORODECKI_1995}~\etal derives sufficient and necessary conditions on quantities derived from an arbitrary two-qubit state for a violation of a Bell-\acs{CHSH} inequality, such conditions are derived by way of measuring correlations of this kind on the density matrix $\varrho$:
+
+\begin{align}
+	T_{nm} = \Tr(\varrho \sigma_n \otimes \sigma_m).
+\end{align}
+
+\noindent
+The two largest singular values ($\lambda_1,\lambda_2$) of the resulting matrix $T$, give the maximum expectation value of the operator associated with Bell-\acs{CHSH} inequality achievable by the density matrix $\varrho$
+
+\begin{align}
+	\ev{S} = 2\sqrt{\lambda_1^2 + \lambda_2^2},
+\end{align}
+
+\noindent
+the maximum value for the above expression is achieved when $\ev{S} = 2\sqrt{2}$, which occurs when the absolute values of singular values of $T$ attain their maximum value of $1$. Under local realism, the maximum value attainable is $\ev{S}=2$. A violation of Bell-type inequality is often considered an excellence indicator of the presence of entanglement in a pure two-qubit system; alas, despite its experimental convenience, it is not a true measure of entanglement\footnote{Ref.~\cite{Munro_2001} shows that in general, it is not possible to discern the degree of entanglement (a quantifiable measure) in a state \via an inference from a violation of a Bell-type inequality.}.
+
+
+\paragraph{Bell-Mermin operator}
+
+\noindent
+A similar condition to the Bell-\acs{CHSH} can be derived for a $N$-qubit \acs{GHZ} state (and any state locally equivalent to it) and the existence of non-local quantum correlations can be verified by a measurement of the Bell-Mermin operator~\cite{Mermin_1990}:
+
+ \begin{align}
+ 	\labelEquation{mermin}
+ 	\mathcal{M}_N = \frac{1}{2i}\left(\displaystyle\prod_{j=1}^{N} (X_j + iY_j) - \displaystyle\prod_{j=1}^{N}(X_j - iY_j)\right),
+ \end{align}
+
+ \noindent
+ where $X_j, Y_j$ denote the Pauli matrices, acting on the qubit $j$. One can show that permutations of the terms of the form $Y_1Y_2 \cdots Y_{2m}\cdots X_n$ where $m\in{1,2,\ldots, \left\lfloor \frac{N}{2} \right\rfloor}$ vanish. Such a term will have a coefficient of $i^{2m} = -1$ from the first product and a coefficient of $-(-1)^{2m}i^{2m} = 1$ from the second product. Hence, only permutations of terms with an odd number of $Y$'s are non-vanishing. 
+
+ \clearpage
+ \noindent
+ Permutations of a term where the number of $Y$'s is $k=2l+1$ have a coefficient $+1$, where $l$ is in the set of all even numbers less than $N$ (including $0$), otherwise having $-1$. The number of such distinct permutations is given by $\displaystyle\sum_{j \text{odd}} \binom{N}{j} = 2^{N-1}$. 
+
+\bigskip
+\noindent
+ Furthermore, the \acs{GHZ} state is an eigenstate with eigenvalue $2^{N-1}$ of the Bell-Mermin operator, which implies that the \acs{GHZ} state is an eigenstate with eigenvalue $+1$ of each of the non-vanishing terms\footnote{Self-adjoint operators with this property with respect to some state, are said to be stabilizing operators of that state. More on this a few lines down the text.}, and attains the maximum expectation value with respect to the Bell-Mermin operators \ie $\expval{\mathcal{M}_N}_\text{GHZ} = 2^{N-1}$. While local hidden-variable theories under local realism~\cite{EPR_1935} predict an expectation value of $\expval{\mathcal{M}_N} <2^{N/2}$ for even $N$, and $\expval{\mathcal{M}_N} < 2^{(N-1)/2}$ for odd $N$~\cite{Mermin_1990} --- which for $n\ge 3$ are both less than the maximum expectation value for the quantum analog, thus leading to a violation of both inequalities that grows exponentially in $N$. For the three-qubit case, the Bell-Mermin operator of~\refEquationOnly{mermin} takes the form:
+
+ \begin{align}
+ 	\mathcal{M} = X_1X_2X_3 - X_1Y_2Y_3 - Y_1X_2Y_3 - Y_1Y_2X_3.
+ \end{align}
+
+\paragraph{Entanglement witnesses}
+\noindent
+A way to detect genuine multi-particle entanglement\footnote{A pure state is genuinely multipartite entangled if it cannot be written as tensor product of two states in any bipartition~\cite{Guhne_2009}.} around the expected state is by means of a so-called entanglement witness operator $\mathcal{W}$. An entanglement witness operator $\mathcal{W}$ is a self-adjoint operator, which has a positive or zero expectation value for all product states (fully separable states) and negative for some non-separable states~\cite{Horodecki_1996}; that is:
+
+\begin{align}
+	\labelEquation{witness_op}
+	\Tr(\mathcal{W}\varrho) &=
+	\begin{dcases}
+		\geq 0 & \text{ for all product states } \varrho_s, \\
+		< 0 & \text{ for some entangled states } \varrho_e
+	\end{dcases}.
+\end{align}
+
+\noindent
+In general, finding such an entanglement witness operator is not a trivial matter\footnote{See Refs.~\cite{Gurvits_2003,Gharibian_2010} for a thorough exposition on this.}, however for a certain class of states, called stabilizer states, finding a witness operator can be reduced to finding the so-called stabilizing operators. A stabilizing operator $S^{(k)}$ for some state $N$-qubit $\ket{\psi}$, satisfies the following:
+
+\begin{align}
+	S^{(k)}\ket{\psi} = \ket{\psi},
+\end{align}
+
+\noindent
+\ie it is an eigenstate of $S^{(k)}$ with eigenvalue $+1$~\cite{Toth_2005}. Stabilizer states can be uniquely defined in terms of their stabilizing operators, thus it is possible to construct entanglement witnesses, detecting entanglement around the ideal state. An entanglement witness operator detecting genuine multi-partite entanglement around the ideal state $\ket{\psi}$ has a noise threshold $p_\text{limit}$, that is, it will detect a mixed state of the form $\varrho(p_\text{noise}) = p_\text{noise}\mathds{1}/2^N + (1- p_\text{noise})\op{\psi}$ as genuinely entangled if $p_\text{noise}$ is below the positive-valued threshold $0<p_\text{limit}<1$~\cite{Toth_2005}. 
+
+
+\section{Quantum circuit model}
+\labelSection{quantum_circuit_model}
+The quantum circuit model (or quantum network model)~\cite{Deutsch_1989} has many parallels with the classical model of Boolean logic circuits, and in fact it is a quantum generalization of the latter. In the classical model of Boolean logic circuits, the smallest information carrying unit is the bit and information processing proceeds temporally \via computations.
+
+\clearpage
+\noindent
+A computation is an abstraction of any operation that takes as input a set of given input values (bits in this instance) to give a set of output values (bits in this instance). A basic  computation is abstracted as a Boolean logic gate, which given a fixed length Boolean input of $n$ bits computes some Boolean function of the form $f: \{0,1\}^{n} \to \{0,1\}$. Hence, at the very basic level, a Boolean logic circuit consists of a set of $n$ inputs and $m$ outputs, and intermediary between the inputs and outputs is a network of logic gates that perform Boolean functions of the aforesaid form for various fixed length input sizes, with the outputs of some gates serving as input to other logic gates in the network.
+
+
+\bigskip
+\noindent
+In the quantum circuit model of computation, the qubit is the corresponding smallest information carrying unit and information processing proceeds temporally in a similar fashion to the classical case, \via computations. The quantum analog of a Boolean logic gate is a quantum logic gate, and a quantum circuit consists of quantum logic gates acting on a set of input $n$ qubits, which at the end of the computation are subsequently measured in some basis to produce $m$ output bits. At each time step, a quantum logic gate performs some unitary (reversible) operation $U$, hence the quantum circuit model of computation is a reversible model of computation (before measurement).
+
+\bigskip
+\noindent
+When visualizing in a quantum circuit, represented as wires, qubits start in some initial state and evolve temporally from left to right, with the inputs on the left of the diagram and the outputs on the right. At the right end of the circuit after measurement, classical bits are indicated with double wires. Common quantum logic gates we will frequently refer to throughout this thesis are shown in~\refTableOnly{gates}.
+
+\bigskip
+\noindent
+~\refFigureOnly{bell_state_generation} shows a simple quantum circuit that prepares one of the maximally entangled Bell states, $\ket{\Phi^{-}} = (\ket{00}-\ket{11})/\sqrt{2}$ shown in~\refEquationOnly{bell_state_negative} and measures the two qubits in the computational basis,
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\begin{yquant*}[register/separation=6mm]
+			init {$\ket{0}$} q[0];
+			init {$\ket{0}$} q[1];
+			x q[0];
+			h q[0];
+			cnot q[1] | q[0];
+			measure q;
+		\end{yquant*}
+	\end{tikzpicture}
+	\caption[A quantum circuit preparing one of the Bell state $\ket{\Phi^{-}}$ and measures it in the computational basis states.]{A quantum circuit preparing one of the Bell state $\ket{\Phi^{-}}$ and measures it in the computational basis states.}
+	\labelFigure{bell_state_generation}
+\end{figure}
+
+\begin{align}
+	\ket{\Phi^{-}} = \frac{1}{\sqrt{2}}(\ket{00} - \ket{11}).
+	\labelEquation{bell_state_negative}
+\end{align}
+
+Initially, the state $\ket{\psi}$ begins as 
+
+\begin{align}
+	\ket{\psi} &= H X  \otimes  \mathds{1} \ket{00}, \nonumber \\
+	&= \ket{-}\ket{0}.
+\end{align}
+
+Applying a controlled-NOT gate on the above gives
+
+\begin{align}
+	\text{CX}\ket{-}\ket{0} &= \frac{1}{\sqrt{2}}\text{CX}(\ket{0}\ket{0}  - \ket{1}\ket{0}),\nonumber \\
+	&= \frac{1}{\sqrt{2}}(\ket{0}\ket{0} - \ket{1}\ket{1}).
+\end{align}
+
+\noindent
+Measuring the above state in the computational basis states will yield the measurement outcome $o=00$ or $o=11$ with equal probability.
+
+
+\begin{table}[t!]
+	\centering
+	\caption{Common quantum logic gate with their names, circuit symbol and matrix presentation}
+	\labelTable{gates}
+	\resizebox{1\textwidth}{!}{%
+	\begin{tabular}{cccc}
+		\toprule
+		Gate & Nomenclature & Circuit symbol & Matrix representation \\
+		\toprule
+		NOT/$X$ & Pauli-$X$ & \begin{tikzpicture}\begin{yquant*}x q;\end{yquant*}\end{tikzpicture} & $\mqty(0 & 1 \\ 1 & 0)$  \\
+		$Y$ & Pauli-$Y$ & \begin{tikzpicture}\begin{yquant*} y q;\end{yquant*}\end{tikzpicture} & $\mqty(0 & -i \\ i & 0)$ \\
+		$Z$ & Pauli-$Z$/Phase flip & \begin{tikzpicture}\begin{yquant*}z q;\end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 \\ 0 & -1)$ \\
+		$H$ & Hadamard & \begin{tikzpicture}\begin{yquant*} h q;\end{yquant*}\end{tikzpicture} & $\frac{1}{\sqrt{2}}\mqty(1 & 1 \\ 1 & -1)$ \\
+		$T$ & $T$ Gate & \begin{tikzpicture}\begin{yquant*} box {$T$} q;\end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 \\ 0 & e^{i \pi/4})$ \\
+		$S$ & Phase Gate & \begin{tikzpicture}\begin{yquant*} box {$S$} q;\end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 \\ 0 & i)$ \\
+		$R_{\phi}$ & Phase-Shift & \begin{tikzpicture}\begin{yquant*} box {$R_{\phi}$} q;\end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 \\ 0 & e^{i\phi})$ \\
+		CNOT/CX & Controlled-NOT & \begin{tikzpicture}\begin{yquant*} cnot q[1] | q[0]; \end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0)$ \\
+		CPHASE/CZ & Controlled-$Z$ & \begin{tikzpicture}\begin{yquant*} box {$Z$} q[1] | q[0]; \end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & -1)$ \\
+		SWAP & Swap Gate & \begin{tikzpicture}\begin{yquant*} swap (q[0-1]); \end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1)$ \\	
+		CCNOT/CCX/$C^2[X]$ & Toffoli/Controlled-Controlled-NOT & \begin{tikzpicture}\begin{yquant*} cnot q[2] | q[0-1]; \end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0)$ \\
+		CCPHASE/CCZ/$C^2[Z]$ & Controlled-controlled-Z/Controlled-Controlled-Phase & \begin{tikzpicture}\begin{yquant*} box {$Z$} q[2] | q[0-1]; \end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1)$ \\
+	C-SWAP & Fredkin/Controlled-SWAP & \begin{tikzpicture}\begin{yquant*} swap (q[1-2]) | q[0]; \end{yquant*}\end{tikzpicture} & $\mqty(1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1)$ \\ \\
+	\toprule
+	\end{tabular}
+	}
+\end{table}
+
+\bigskip
+\noindent
+In later chapters we will make plenty of references to circuit depth; circuit depth is defined as the number of consecutive parallel operations in a circuit from its input to output. Circuit depth is taken to be a good proxy for algorithmic time, since each such parallel operations can be counted as a single step. Consider the circuit~\refFigureOnly{circuit_depth}, the circuit has $8$ quantum logic gates and a circuit depth of $6$. This is because the operations in a given column can be executed in parallel, take for instance the set of operations $H \otimes \mathds{1} \otimes \mathds{1}$, $\mathds{1} \otimes H \otimes \mathds{1}$, and $\mathds{1} \otimes \mathds{1} \otimes H$; these operations are equivalent to the single operation $H \otimes H \otimes H$, and thus can executed in parallel without temporal racing conditions.
+
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	\begin{yquant}[register/separation=6mm]
+		qubit {$\ket{0}$} j[3];
+		h j;
+		box {$S$} j[0] | j[1];
+		box {$T$} j[0] | j[2];
+		h j[1];
+		box {$S$} j[1] | j[2];
+		h j[2];
+		measure j;
+	\end{yquant}
+	\end{tikzpicture}
+	\caption{A quantum circuit with $8$ quantum logic gates and circuit depth of $6$.}
+	\labelFigure{circuit_depth}
+\end{figure}
+
+\subsection{Universal gate sets}
+\noindent
+In classical computation the gate set $\{\text{AND, OR and NOT}\}$ defines a universal gate set as every Boolean can be decomposed into a finite sequence of the gates in the set, and in classical reversible computation the reversible the Boolean Toffoli gate is a universal logic gate. This implies that any logic circuit $L$ which computes a Boolean function of the form $f: \{0,1\}^n \to \{0,1\}$ can be decomposed into a logic circuit $L'$, equivalent in operation, made up of only a combination of gates in the universal gate set. Similarly in quantum information processing, a quantum logic gate set is said to be a universal gate set if any unitary operation $U$ can be decomposed into a finite sequence of the gates in that set. A commonly used universal gate set is $\{H, S, \text{CNOT}, T\}$, in terms of the Hadamard  $H$, phase  $S$, CNOT  and $T$ gates. A controlled-controlled-NOT gate with such a universal gate set can be decomposed into seven $T/T^{\dagger}$, two $H$ and six controlled-NOT gates. A physical realization may implement a different gate from the aforesaid set to the convenience of the physical implementation, \ie the universal gate set for IBM Q processors is $\{\text{CNOT}, R_z\left(\theta\right) ,\sqrt{X}, X\}$ and same gate may not necessarily decompose into the same number of gates across universal gate sets, which may raise concerns over the efficiency of a particular gate set. However, any two universal gate sets can simulate one another efficiently~\cite{Dawson_2005} and a particular choice of universal gate set does not the effect the asymptotic efficiency of a physical realization implementing a particular gate set.
+
+\section{Polarization measurements}
+In the experiments we will describe in later chapters we shall make plenty of references to performing polarization measurements on a quantum state of light. Hence, I have endeavored to outline in passing what is essential in this regard, that is the mathematical description of the operations of optical elements that alter and measure the polarization of single photons. 
+
+
+\subsection{Wave plates}
+Perhaps, the most wide-spread of such optical elements are wave plates. Wave plates are optical elements made up of birefringent material and alter the polarization of light normally incident on it by introducing a phase-shift between its polarization components along the ordinary and extraordinary axes\footnote{Sometimes called slow-axis and fast-axis, respectively} of the material. For light normally incident on a wave plate, the polarization component along the ordinary axis\footnote{The material is often cut such that the ordinary axis is normal to the plane of the wave plate's front face.} experiences a different refractive index than the polarization component along the extraordinary axis, hence the polarization state of the transmitted light exits the wave plate out of phase by $\varphi$.  
+
+\bigskip
+\noindent
+For a phase shift of $\varphi=\pi$, the corresponding wave plate is called a \gls{HWP}. The action of a \acs{HWP} on the two perpendicular polarization modes $\hat{a}_H, \hat{a}_{V}$ (typically horizontal and vertical axis of the lab frame) of a single photon\footnote{Here, $\hat{a}^{\dagger}_H\ket{\text{vac}} = \ket{H} = \ket{0}$ and $\hat{a}^{\dagger}_V\ket{\text{vac}}=\ket{V}=\ket{1}$} is given by~\cite{Kok_2007}
+
+\begin{align}
+	U_\text{HWP}(\theta) = \mqty(\cos(2\theta) & -\sin (2\theta) \\
+			-\sin (2 \theta ) & -\cos (2 \theta )),
+\end{align}
+
+\noindent
+where $\theta$ is the angle between the extraordinary axis and the vertical axis of the lab fame. Similarly, when $\varphi=\pi/2$ the corresponding wave plate is called a quarter wave plate. 
+
+\clearpage
+\noindent
+The action of a \acs{QWP} on the two perpendicular polarization modes $\hat{a}_H, \hat{a}_{V}$ (typically horizontal and vertical axis of the lab frame) of a single photon is given by~\cite{Kok_2007}
+
+\begin{align}
+ U_\text{QWP}(\theta) = \frac{1}{\sqrt{2}}\mqty(i-\cos (2 \theta ) & \sin (2 \theta ) \\
+ \sin (2 \theta ) & i + \cos (2 \theta )),
+\end{align}
+
+\noindent
+where $\theta$ is similarly defined as before.
+
+
+\bigskip
+\noindent
+Similar to~\refEquationOnly{single_qubit_rotation}, any polarization rotation $R \in \text{SU}(2)$ can be decomposed as a combination of the action of two \acs{QWP}s and one \acs{HWP}, coaxially aligned~\cite{Simon_1990}. Furthermore, the said components can be in any arrangement, \ie a \acs{HWP} sandwiched between two \acs{QWP}s.
+
+
+\subsection{Beam splitters}
+
+A \gls{PBS} acts as a polarization filter; a photon polarized along the transmission axis of a \acs{PBS} is transmitted, and one polarized perpendicular to the transmission axis of a \acs{PBS} is reflected at a right angle to the transmission axis. Hence, in an experimental setting a \acs{PBS} can be taken to be measurement device performing projective measurements of polarization and thus the computational basis $\{\ket{H=0}, \ket{V=1}\}$. Typically, whenever a \acs{PBS} is designated as measurement device its transmission axis is parallel with the horizontal plane in the lab frame (hence transmitting horizontally polarized light and reflecting vertically polarized light) and the transmitted light is sent to a detection stage. The action of a \acs{PBS} when its transmission axis is parallel with the horizontal, or vertical plane in the lab frame respectively are given by,
+
+\begin{align}
+	P_H = \op{H} = \mqty(1 & 0 \\ 0 & 0), \\
+	P_V = \op{V} = \mqty(0 & 0 \\ 0 & 1).
+\end{align}
+
+\noindent
+A \gls{NPBS} has almost an similar action to wave plates, however not on the polarization of the light but instead on the spatial path modes of the light. The action of a \acs{NPBS} on the input modes on each side (at right-angles to one another) of the beam splitter cube $\hat{a}_\text{in}$ and $\hat{b}_\text{in}$ is given by\footnote{Similarly, $\hat{a}^{\dagger}_\text{in}\ket{\text{vac}} = \ket{l} = \ket{0}$ and $\hat{b}^{\dagger}_\text{out}\ket{\text{vac}}=\ket{r}=\ket{1}$} 
+
+\begin{align}
+	U(\varphi, \theta)_\text{NPBS} = \mqty(\cos(\theta) & ie^{-i\varphi}\sin(\theta) \\ ie^{i\varphi}\sin{\theta} & \cos(\theta))
+\end{align}
+
+\noindent
+The angle $\theta$ parameterizes the probability amplitudes of transmission and reflection, and the relative phase $e^{i\varphi}$ ensures that the above action is unitary. A 50:50 beam splitter corresponds to the choice $\varphi = \pi/2$ and $\theta= \pi/4$ and its action is given by
+
+\begin{align}
+	U(\varphi, \theta)_\text{NPBS} = \frac{1}{\sqrt{2}}\mqty(1 & 1 \\ -1 & 1),
+\end{align}
+
+\noindent
+which is equivalent to the action of the Pauli-$Z$ and Hadamard gate $H$, $U(\pi/2, \pi/4) = ZH$.
+
+\clearpage
+\noindent
+The combination of a \acs{HWP}, \acs{QWP}, \acs{PBS} and detector can be used to perform any polarization projective measurement, the polarization analyser is shown in~\refFigureOnly{pol_analysis}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=.5\textwidth]{pol_meas}
+	\caption[A sketch of a polarization analyser consisting of a \acs{HWP}, \acs{QWP}, \acs{PBS}, and a single photon detector.]{A sketch of polarization analyser consisting of a \acs{HWP}, \acs{QWP}, \acs{PBS}, and a detector.}
+	\labelFigure{pol_analysis}
+\end{figure}
+
+\noindent
+~\refTableOnly{target_states} shows examples of wave plate settings for projecting out a target state, in the case when the \acs{PBS} transmits horizontally polarized light.
+
+\begin{table}
+	\centering
+	\caption[Examples of wave plates settings for the polarization analyser in~\protect\refFigureOnly{pol_analysis} to project out a target state.]{Examples of wave plates settings for the polarization analyser in~\protect\refFigureOnly{pol_analysis} to project out a target state. Here, ${\ket{D}\defeq(\ket{H}+\ket{V})/\sqrt{2}}$, ${\ket{A}\equiv(\ket{H} - \ket{V})/\sqrt{2}}$, ${\ket{L}\defeq(\ket{H}+i\ket{V})/\sqrt{2}}$ and ${\ket{R}\defeq(\ket{H}-i\ket{V})/\sqrt{2}}$.}
+
+	\labelTable{target_states}
+	\begin{tabular}{lll}
+		\toprule
+		Target state & QWP$(\theta)$ & HWP$(\theta)$ \\
+		\toprule
+		$\ket{H}$  & $0^{\circ}$   & $0^{\circ}$ \\
+		$\ket{V}$  & $0^{\circ}$   & $45^{\circ}$ \\ 
+		$\ket{D}$  & $45^{\circ}$  & $22.5^{\circ}$ \\
+		$\ket{A}$  & $45^{\circ}$  & $-22.5^{\circ}$ \\
+		$\ket{R}$  & $90^{\circ}$  & $22.5^{\circ}$ \\
+		$\ket{L}$  & $0^{\circ}$   & $22.5^{\circ}$ \\
+		\toprule
+	\end{tabular}
+\end{table}

@@ -1,0 +1,115 @@
+\phantomsection
+\addcontentsline{toc}{part}{Prologue}
+
+\chapter{Prelude}
+\labelChapter{prelude}
+
+\section{Historical footnote}\labelSection{historical_footnote}
+
+\begin{epigram}{Lewis Carroll, Alice in Wonderland}
+    \enquote{Begin at the beginning," the King said, very gravely, "and go on till you come to the end: then stop.} 
+\end{epigram}
+
+\lettrine[lines=3]{T}{wo} score years have passed since Richard Feynman conceived the idea of simulating quantum mechanical phenomena with a fundamentally \enquote{new kind of computer}~\cite{Feynman_1982}. He argued for the necessity of such a new kind of computer on the account that conventional digital computing machines were inadept at such a task; reasons being that any classical description of the quantum state of a many-particle system needed to keep track of a large number of variables, far greater in number than the size of the system:
+
+\begin{displayquote}
+	\enquote{\emph{But the full description of quantum mechanics for a large system with $R$ particles is given by a function which we call the amplitude to find the particles at $x_1, x_2, \ldots ,x_R$ and therefore, because it has too many variables, it cannot be simulated with a normal computer with a number of elements proportional to $R$.}}
+\end{displayquote}
+
+\noindent
+He also put forth the point that the predictions of quantum mechanics, supported by numerous experimental validations to remarkable levels of accuracy\footnote{The prediction of the value of the anomalous magnetic moment of the electron by quantum electrodynamics agrees with the experimentally measured value to more than $10$ decimal figures; \ie the error in the prediction is less than the ratio of the width of a human hair strand to the height of Mount Everest.}, were incompatible with any interpretation that attempted to reconcile them within classical physics, ~\ie, by interpreting the probabilities arising in quantum mechanics as a reflection of the observer's ignorance of the full degrees of freedom of a quantum system:
+
+\begin{displayquote}
+\enquote{\emph{If you take the computer to be the classical kind I've described so far (not the quantum kind described in the last section) and there’re no changes in any laws, and there's no hocus-pocus, the answer is certainly, No! This is called the hidden variable problem: It is impossible to represent the results of quantum mechanics with a classical universal device.}}
+\end{displayquote}
+
+\noindent
+Thus it seemed to Feynman that any inquiry directed towards quantum mechanical phenomena by way of simulation, classical in its foundations, in one way or another would miss out on a full understanding of these phenomena, and that a possible way of circumvention was the full acceptance of quantum mechanics, that is, any such simulation needed to be quantum mechanical from the outset. 
+
+
+\clearpage
+\noindent
+What he meant by this, was that the new kind of computer he envisaged would \enquote{itself be built of quantum mechanical elements which obey quantum mechanical laws}, and he would call such a computer, a \emph{quantum computer}\footnote{Aptly named; uncharacteristically good nomenclature by a physicist.}. To Feynman this was a \emph{condicio sine qua non}, and to this end he said these epoch-making words:
+
+\begin{displayquote}
+	\enquote{\emph{Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical, and by golly it's a wonderful problem, because it doesn't look so easy.}}
+\end{displayquote}
+
+\noindent
+Notwithstanding, the boldness of such an enterprise, Feynman's ideas grew in influence, and in the same decade they would reach a new zenith. In 1985, David Deutsch formulated a fully quantum mechanical model of computation~\cite{Deutsch_1985,Deutsch_1989}, which formalized many of the ideas that had been floating around up until that point. In particular, he showed that the operations of such a computing device subsume the operations of a conventional digital computer, but would further admit a class of operations, which exploit quantum phenomena such as superposition, interference, entanglement, and non-determinism, with no classical analogues. Deutsch's ideas on this subject had taken a slightly different trajectory; he sought for a general purpose quantum computing machine, which could be used for, but was not entirely limited to, simulating physics\footnote{Such as an analogue quantum simulator.}; which meant the aforementioned phenomena would be exploited in a programmable way, analogous to the operation of a conventional digital computer. To this end, Deutsch and Josza~\cite{DeutschJozsa_1992} formulated a problem\footnote{Putting utility aside for the moment.}, which in principle could be solved more efficiently by quantum computation than by any classical computation, deterministic or otherwise. Thence, endeavors in this direction escalated rapidly, and soon culminated in Peter Shor's discovery of an efficient way to perform the discrete Fourier transform on a quantum computer, which he applied in his~\emph{chef-d'œuvre}~\cite{Shor_1997}, showing that quantum computers were, in principle, capable of efficiently computing discrete logarithms, and subsequently prime factorization of large numbers, which are both considered to be difficult problems for a classical computer.\footnote{Difficult as in, there is no known classical algorithm that can give an answer to the problem in algorithmic time that scales polynomially with the problem size.}
+
+\bigskip
+\noindent
+The discoveries of Peter Shor, and their implications were a significant milestone for quantum computing as a field of study. Notwithstanding the progress that had been made thus far, there were questions yet to be answered, particularly those of a practical kind. All of the considerations hitherto were in \emph{abstracto}, based on the hypothetical premise that such a quantum device would be operating under ideal conditions, that is, its operations would be fully coherent quantum mechanical processes, free from any errors, or, in the least negligible. In fact, the presupposition that the device would have the ability to be prepared in a coherent superposition of input states, and be kept in such a state for the duration of a computation, had been the crux in its efficiency gains. In practice this entailed precise control over the device's means, among other practical issues, which had not been addressed yet, and few things are so fatal to an ideal as its realization. One preeminent stumbling block that stood in the path towards realizing this ideal was that of decoherence, which can arise as a consequence of a quantum system, however isolated, coupling to unwanted and external degrees of freedom such as those of its surrounding environment. As a result of this external influence, over time the ability of the system to be in a coherent superposition of states is lost\footnote{Relaxation noise , where a system in an excited state spontaneously relaxes to its ground state, can also affect its coherence.}. This is often attributed to the interaction having a preferred subset of \enquote{classical} (statistical mixtures of) states in the full Hilbert space of the system together with its environment, with the vast of majority of states effectively excluded by the interaction, in a phenomena known as environment-induced superselection~\cite{Zurek_1991, Zurek_2003}. 
+
+
+\clearpage
+\noindent
+The time scale over which the computer remains quantum-mechanically coherent (coherence time), is of great practical importance, since it dictates the length of the longest possible quantum computation. Candidate quantum systems then (\eg quantum optical systems) had relatively short-lived coherence times\footnote{Coherence times have much improved since then. For instance, the coherence times for superconducting qubits ranges between \SI{50}{\micro\second} to \SI{100}{\micro\second},while for trapped-ion qubits the coherence times range between \SI{0.2}{\second} to \SI{600}{\second}~\cite{Kjaergaard_2020,Bruzewicz_2019}.}, if the effects of decoherence were left unchecked, a large-scale quantum device of such a kind would not be viable for the foreseeable future, or ever!
+
+\bigskip
+\begin{epigram}{Friedrich Nietzsche}
+\noindent \enquote{There will always be rocks in the road ahead of us. They will be stumbling blocks or stepping stones; it all depends on how you use them.}
+\end{epigram}
+
+\bigskip
+\noindent
+The advent of theoretical developments surrounding appropriate extensions of classical fault-tolerant methods, led to the discovery of quantum analogs of error detection and correction, which could, under reasonable assumptions, reduce errors introduced during a computation by the inimical effects of decoherence. These discoveries, in conjunction with the threshold theorem~\cite{Aharonov_Or_1997,Shor_1996} meant that, in principle, it is possible to perform a quantum computation reliably on imperfect hardware, at the cost of an overhead incurred from its fault-tolerant design (fault-tolerantly encoded states and elementary operations) in the computation, which grows polylogarithmically with the length of the computation~\cite{gottesman_2009}. As a result there was renewed optimism in that building a scalable and fault-tolerant quantum computer should be possible in practice. However, the overheads in the fault-tolerant methods have unforeseeably put their use far beyond reach, even for modern-day quantum computers~\cite{Preskill_2018}.
+
+\bigskip
+\noindent
+The~\gls{NISQ} era refers to the interregnum permeated with quantum computers that are big enough in size (50-100 qubits) to be no longer trivially simulatable with digital computers but not yet capable of full fault-tolerant computation~\cite{Preskill_2018}. Due to their non fault-tolerant operation and other hardware-related limitations such as inaccurate control and size, their capabilities will be limited in scope. Despite these apparent limitations, such devices have a utility that is peculiar to them. John Preskill in Ref.~\cite{Preskill_2018} mentions that they make for great testbeds for the investigation of many practical issues brought about by their non-ideal behaviour in a bottom-up manner. In the near-term, many algorithms with a provable quantum advantage will continue to elude realization due to their great costs in resources (number of qubits, number of two-qubit gates). As a result, there is emphasis in designing near-term algorithms in a way that is aware, and attempts to circumvent some of the limitations of near-term devices. One approach, in the way of this emphasis, is one that seeks reduction of the aforementioned resources in near-term quantum algorithms. It is in this light with which this thesis deals.
+
+\section{Organization}
+\labelChapter{organization}
+
+\begin{epigram}{Ralph Waldo Emerson}
+\noindent \enquote{Sometimes a scream is better than a thesis.}
+\end{epigram}
+
+
+\noindent
+In broad terms, the content of this thesis is divided in two as dictated by its initial aims and objectives. The first of which, is to investigate some of the practical issues of, and study in detail, the realization of quantum algorithms on cloud-based quantum processors. 
+
+\clearpage
+\noindent
+We confine our scope of study to two kinds of quantum algorithms, namely quantum search~\cite{Grover_1997} and quantum factoring~\cite{Shor_1997} algorithms, and their realization on IBM's quantum experience platform~\cite{IBMQ}. Here, superconducting quantum processors will be used and their performance under non-ideal operation will be quantified. Even to such a seemingly confined scope, there remains much to be studied, and this thesis comprises nothing more than a mere dint on the surface of a volumeous subject. The other half of the thesis turns towards experimental physics, with the aim of understanding how to build and optimally access a remote small-scale quantum processor. Such a small-scale quantum processor is one based on the use of photons, prepared in a state that falls under a special class of states exhibited by two-state systems called graph states, which serve as a substratum for one-way quantum computing~\cite{Walther_2005}. Thus the structure of this document will be of the form\footnote{This document has as its contents the Masters thesis under the title 'Quantum Computing on Cloud-Based Processors', written for the Department of Physics, Faculty of Natural sciences, Stellenbosch University, solely with the intention of earning its author a Masters degree. In effect, the author seeks to only convey the main results of his study with minimal meanderings, and does not seek to write a full-blown textbook-style thesis. Thus where ever possible the author omits some of the details, though not unnecessary per se, but simply because they have been written  elsewhere with commendable diligence and erudition.}:
+
+\paragraph{Part I: Realizing quantum algorithms on the cloud}
+
+\noindent
+\refChapterOnly{preliminaries} will be a preliminary chapter, partly with the aim of providing necessary background, however brief. The chief aim of this chapter will be for the sake of completeness of the document in its entirety; for a thorough introduction, many a textbook and lecture notes have been written~\cite{Mike&Ike,Preskill_1997,Dewolf_2019}, this chapter will be mainly comprised of their spoils. Fundamental notions of quantum mechanics such as state space, evolution and measurements will be revisited, and their relation to quantum computation summarized.
+
+\bigskip
+\noindent
+\refChapterOnly{unstructured_quantum_search} transitions towards the main matter of the thesis and introduces the problem of finding a needle in a haystack \via quantum search algorithms. This topic is first treated within the theoretical machinery of the quantum circuit model, where we review and study two instances of quantum search algorithms; Grover's search~\cite{Grover_1997} and partial search~\cite{Grover_2005} quantum algorithms along with related results in this regard and their implementations (and their viability thereof) on current quantum hardware. The topic is treated in a similar manner within framework of \gls{MBQC}, by first revisiting the simplest scenario; that of when the needle is in a four-element haystack, which naturally arises as a measurement procedure on a four-qubit graph state. Next, we consider the scenario of an eight-element search space, which contrary to the aforementioned scenario, does not arise as a measurement procedure on a well known graph state. Thence one has to work backwards from its quantum circuit model implementation; by constructing graph states for its various components, of which the most resourceful (in terms of number of qubits and two-qubit gates) is the diffusion operator, which is equivalent to a Toffoli gate (modulo single qubit gates). Thus, the graph state implementations of a Toffoli gate are explored, and their performances assessed on quantum hardware (and thus their viability thereof).
+
+\bigskip
+\noindent
+\refChapterOnly{quantum_prime_factorization} presents the crown jewel of quantum computation in the form of Shor's algorithm for prime factorization~\cite{Shor_1997}. We follow the path of least action, and adopt the standard textbook \emph{modus operandi}, by first introducing the quantum phase estimation algorithm; which seeks to estimate an eigenvalue corresponding to an eigenvector of a unitary matrix, and the theoretical machinery thereof. Thereafter, we reduce prime factorization into an isomorphic problem; that of order-finding, which can be reformulated as a phase estimation problem, and thereby treated with the theoretical machinery of quantum phase estimation. 
+
+\clearpage
+\noindent
+Similar to the previous chapters, we mention a selection of relatively recent realizations of Shor's algorithm. Finally, we present the main contribution of the thesis; which is a proof-of-concept demonstration of the complete prime factorization of ${N=21}$, which builds upon a recent demonstration in this regard, that of Mart\'in-L\'{o}pez ~\etal in Nature Photonics 6, 773 (2012), and goes beyond this demonstration in fully factorizing ${N=21}$, aided by a great reduction in resources (number of two-qubit gates) compared to the original demonstration.
+
+\paragraph{Part II: Building a three-qubit one-way quantum computer}
+
+\noindent
+\refChapterOnly{polarization_entangled_photons} endeavors towards experimentally realizing and characterizing a photonic source of entanglement which takes the form of a two-qubit Bell state where the two qubits are encoded in the polarization \gls{DOF} of two photons; a nonlinear optical process that converts a single photon of higher energy, incident on a nonlinear crystal to a pair of lower energy photons, such that the total momenta and energy of the entire process is conserved. One of the consequences of the aforementioned conversation laws is that the joint polarization state of the generated pair is non-separable or entangled; it is no longer possible to describe the polarization state of one photon (qubit 1) without making reference to the state of the other photon (qubit 2), the manifestation of such an effect is the appearance of non-classical correlations for the polarization measurements of each photon~\cite{HARIHARAN_1996}. An experiment that generates photons in this way is set up in the laboratory, and appropriately characterized as dictated by our aims.
+
+\bigskip
+\noindent
+\refChapterOnly{path_polarization_entangled_photons} is dedicated to the expansion of the two qubit state from the previous chapter to three qubits, with the additional qubit encoded on the path \acs{DOF} of one of the down-converted photons. The additional qubits are realized by having each photon go through a \gls{MZI}. Effectively, the full joint state after this expansion is a linear graph state of three-qubits; a versatile source of entanglement. Once the aforementioned state is characterized, automatic wave plates and translatable mirrors are incorporated into the experimental setup, providing remote control of the measurements of each of the qubits. With accessibility in mind, we designed and built a small mobile graphical user interface (android mobile \enquote{app}), providing an interactive and visual way to remotely control our experimental setup. Through the app, one can conduct experiments of a similar nature in this thesis by the specifying measurement basis for each qubit, and subsequently retrieve the experiment data for analysis \via the app.
+
+\bigskip
+\noindent
+Lastly, the thesis concludes with ~\refChapterOnly{conclusion}, which summarizes the entire body of work, and the author gives an outlook towards related future research.
+
+\section{Contributions}
+
+This thesis draws a significant portion of its material from earlier work in the following papers jointly written with Mark Tame:
+
+\begin{itemize}
+    \item U.Skosana, M.Tame. \enquote{Demonstration of Shor’s factoring algorithm for N=21 on IBM quantum processors}. \emph{Scientific Reports} 11, 16599 (2021).
+	\item \fullcite{Skosana_2021b}
+\end{itemize}

@@ -1,0 +1,40 @@
+\chapter{Conclusion}
+\labelChapter{conclusion}
+
+The aim of the project was to investigate the issues that face and study in detail the realisation of quantum algorithms using online cloud-based quantum \acs{NISQ} processors. The study was not meant to be a comprehensive study of quantum algorithms, and was confined to two kinds of quantum algorithms; quantum search and quantum factoring algorithms. Hence, the first part of the thesis was wholly concerned with realizations of these algorithms on IBM’s quantum experience platform, and the difficulties thereof. Most of the discussions concerning the difficulties of realizing quantum algorithms on \acs{NISQ} processors are phrased in terms of coherence time, or number of two-qubit gates. This is a recurring theme which is emphasized and highlighted with fervent frequency in the first part of the thesis.
+
+\bigskip
+\noindent
+We introduced the topic of the thesis in~\refChapterOnly{prelude} and began \refChapterOnly{preliminaries} by providing the necessary background to fundamental notions of quantum mechanics, such as state space, evolution, measurement and entanglement. The main body of the thesis began \refChapterOnly{unstructured_quantum_search} by introducing the quantum search algorithm for the problem of finding a needle in a haystack. We explored several contributions in this regard that emphasized the imperative of designing algorithms in such a way to circumvent the limitations of \acs{NISQ} processors (short coherence, low qubit connectivity etc) using sundry methods, and presented a marginal contribution of our own that improves over an implementation of a \acs{max-cut} problem using Grover's algorithm~\cite{Satoh_2020} with the aforesaid methods.  However, the improvement is not clear cut, as it is hard to discern whether it is entirely attributable to the improvement of the capabilities of the IBM Q quantum processors. We also attempted to realize a measurement-based Grover's algorithm for three qubits and found that such a realization is somewhat out of reach for IBM Q processors. Our attempts to reduce the number of resources required to realize such a measurement-based algorithm, were futile as there is no \acs{LU}-equivalent graph state with fewer than the initial resource graph state for realizing the measurement-based Toffoli gate. 
+
+\bigskip
+\noindent
+\refChapterOnly{quantum_prime_factorization} introduced Shor's algorithm for prime factorization~\cite{Shor_1997} and presented the main contribution of the thesis; which is a proof-of-concept demonstration of the complete prime factorization of $N=21$, which builds upon a recent demonstration in this regard in Ref.~\cite{Lopez_2012}, and goes beyond this demonstration in fully factorizing $N=21$, aided by a great reduction in resources (number of two-qubit gates) compared to the original demonstration~\cite{Skosana_2021}. 
+
+
+\clearpage
+\noindent
+This feat was achieved by a replacement of the Toffoli gates (which decompose into six controlled-NOT each) in the demonstration in Ref.~\cite{Lopez_2012} with relative phase Toffoli gates (which decompose into three controlled-NOT each), such a replacement cuts the number of two-qubit gates in half in comparison to the demonstration in Ref.~\cite{Lopez_2012}. An interesting point of departure and line of research is whether such a use case of a relative phase Toffoli gates is applicable to instances of Shor's quantum algorithm for a larger number of qubits.
+
+\bigskip
+\noindent
+To reiterate, the first part of the thesis comprises nothing more than a mere dint on the surface of a volumeous subject, that is the ongoing effort to use \acs{NISQ} processors as testbeds for the investigation of many of their practical issues, and the realization of near-term algorithms that are of practical use. The practical issues of \acs{NISQ} as we have seen throughout the first part of the thesis places an emphasis in designing near-term algorithms in a way that is suitable for \acs{NISQ} processors (algorithms that use circuits that require low connectivity among qubits, short circuit depth and fewer two-qubit gates). As suggested by Preskill~\cite{Preskill_2018} one route towards progress in the near-term is \via bottom-up experimentation. Most of the material presented in the first part of the thesis represents such bottom-up experimentation; multi-qubit gates with low connectivity in Ref.~\cite{Gwinner_2020} and divide-and-conquer methods such as the divided \acs{QPE} routine in Ref.~\cite{Amico_2019} and the depth multi-stage quantum search algorithm in Ref.~\cite{Zhang_2020}, less than ideal subdivided oracle for an application of Grover's algorithm in Ref.~\cite{Satoh_2020} and the replacement of Toffoli gates in a circuit with relative phase Toffoli gates while preserving its functional correctness in Ref.~\cite{Skosana_2021}. As \acs{NISQ} processors grow in hardware (increased coherent times, qubit connectivity, real-time classical conditionals) and software capabilities (error mitigation, transpiling, etc), many existing algorithms with provable advantages may become viable, however, until then experimentation may lend a helping hand.
+
+\bigskip
+\noindent
+In the second part, we steered towards experimental physics, and in \refChapterOnly{polarization_entangled_photons} we realized and characterized a photonic source of entanglement which takes the form of a polarization-entangled Bell state. In~\refChapterOnly{path_polarization_entangled_photons} we expanded of the aforesaid two-qubit polarization-entangled Bell state to a three-qubit path-polarization-entangled \acs{GHZ} state, with the additional qubit encoded on the momentum \acs{DOF} of one of the down-converted photons. We designed and built a small mobile graphical user interface, providing an interactive and visual way to remotely control our experimental set up which is the main contribution of the second part of the thesis. Novelty aside, the author believes that such a remotely controlled experimental set up with its ease of access and use can potentially be of some pedagogical worth to future students, particularly undergraduates as such a small-scale experimental setup that contains the some of the core aspects of quantum mechanics are a rarity in the author's department\footnote{For the author, the experiments performed in this thesis were the first of their kind (quantum mechanical) they had ever done.}. A possible point of departure from here would be the expansion of the three-qubit state to a four-qubit state~\cite{Park_2007}, providing an even more versatile resource state to remotely control, and on which to carry out quantum algorithms and quantum games. The author would also like to refine the experimental setup and mobile GUI (or a web interface), with the aim of eventually making it publicly accessible to everyone else besides the author and his supervisor.
+
+\clearpage
+\pagestyle{empty}
+\begin{fullwidth}
+    ~\vfill
+    \begin{center}
+        \large
+        \begin{minipage}{0.5\linewidth}
+            \begin{epigram}{Blaise Pascal, Lettres Provinciales}
+                \enquote{Je n’ai fait celle-ci plus longue que parce que je n’ai pas eu le loisir de la faire plus courte.}
+            \end{epigram}
+        \end{minipage}
+    \end{center}
+    ~\vfill
+\end{fullwidth}

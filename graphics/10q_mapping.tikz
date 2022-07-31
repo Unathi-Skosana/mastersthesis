@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=empty white indigo] (0) at (-2, 0) {$0$};
+		\node [style=empty white indigo] (1) at (0, 0) {};
+		\node [style=empty white indigo] (2) at (2, 0) {$1$};
+		\node [style=empty white indigo] (3) at (4, 0) {$2$};
+		\node [style=empty white indigo] (4) at (0, -2) {$8$};
+		\node [style=empty white indigo] (5) at (0, -4) {$9$};
+		\node [style=empty white indigo] (6) at (2, -4) {$4$};
+		\node [style=empty white indigo] (7) at (4, -4) {$3$};
+		\node [style=empty white indigo] (8) at (-2, -4) {$6$};
+		\node [style=empty white indigo] (9) at (-4, -4) {$5$};
+		\node [style=empty white indigo] (10) at (0, 0) {$7$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 3] (0) to (10);
+		\draw [style=new edge style 3] (10) to (2);
+		\draw [style=new edge style 3] (2) to (3);
+		\draw [style=new edge style 3] (10) to (4);
+		\draw [style=new edge style 3] (4) to (5);
+		\draw [style=new edge style 3] (5) to (6);
+		\draw [style=new edge style 3] (6) to (7);
+		\draw [style=new edge style 3] (9) to (8);
+		\draw [style=new edge style 3] (8) to (5);
+	\end{pgfonlayer}
+\end{tikzpicture}

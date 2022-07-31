@@ -1,0 +1,98 @@
+\documentclass[nols, nohyper, notoc, nofonts, nobib, openany]{tufte-book}
+\input{preamble}
+
+\includeonly{%
+	   glossary,
+	   titlepage,
+	   copyright,
+	   colophon,
+	   abstract,
+	   acknowledgements,
+	   toc,
+	   lists,
+	   chapters/prelude,
+	   chapters/introduction,
+	   chapters/grover,
+	   chapters/shor,
+	   chapters/polarization_photons,
+       chapters/path_polarization_photons,
+	   chapters/conclusion,
+	   bibliography,
+	   appendices/appendix_A,
+	   appendices/appendix_B,
+	   appendices/appendix_C,
+	   appendices/appendix_D,
+}
+
+%%
+% Thesis meta data
+\title{Quantum Computing on Cloud-Based Processors}
+\author[Unathi K. Skosana]{Unathi K. Skosana}
+\publisher{Stellenbosch University}
+
+\include{glossary}
+\makeglossaries
+
+\begin{document}
+
+% Front matter
+\frontmatter
+\pagenumbering{roman}
+
+\include{titlepage}
+\include{copyright}
+\include{abstract}
+\include{colophon}
+\include{acknowledgements}
+\include{toc}
+\include{lists}
+
+% do input in toc
+\addtocontents{toc}{\protect\setcounter{tocdepth}{3}}
+
+%%
+% Start the main matter (normal chapters)
+\mainmatter
+
+% Start at chapter zero
+\setcounter{chapter}{-1}
+
+% Arabic page numbering
+\pagenumbering{arabic}
+\pagestyle{mainmatter}
+
+\include{chapters/prelude}
+
+\part{Realizing quantum algorithms on the cloud}
+\labelPart{realizing_quantum_algorithms_on_the_cloud}
+
+\include{chapters/introduction}
+\include{chapters/grover}
+\include{chapters/shor}
+
+\part{Building a three-qubit one-way quantum computer}
+\labelPart{building_a_three_qubit_one_way_quantum_computer}
+
+\include{chapters/polarization_photons}
+\include{chapters/path_polarization_photons}
+
+\part{Epilogue}
+\labelPart{epilogue}
+\include{chapters/conclusion}
+
+%%
+\appendix
+
+\part{Technical appendix}
+\labelPart{appendix}
+
+\include{appendices/appendix_A}
+\include{appendices/appendix_B}
+\include{appendices/appendix_C}
+\include{appendices/appendix_D}
+
+%%
+\backmatter
+\include{bibliography}
+
+\end{document}

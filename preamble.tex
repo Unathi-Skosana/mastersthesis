@@ -1,0 +1,543 @@
+%%
+% colors
+\usepackage{color}
+
+\definecolor{pinegreen}{rgb}{0.0, 0.47, 0.44}
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+\definecolor{amethyst}{rgb}{0.6, 0.4, 0.8}
+\definecolor{skyblue}{rgb}{0.53, 0.81, 0.94}
+\definecolor{indigo}{RGB}{140, 140, 229}
+\definecolor{purple}{cmyk}{0.79,0.88,0,0}
+\definecolor{darkred}{RGB}{157, 16, 45}
+\definecolor{platinum}{rgb}{0.9, 0.89, 0.89}
+\definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
+\definecolor{silver}{RGB}{221, 222, 224}
+\definecolor{gray}{RGB}{44, 46, 53}
+\definecolor{grey}{RGB}{102, 102, 102}
+
+
+%%
+% title formats
+\usepackage{titlesec, titletoc}
+
+% section num and toc depth
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+%% Define a HUGE
+\newcommand\HUGE{\fontsize{48}{60}\selectfont}
+
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+
+% part format
+\titleformat{\part}[display] %
+{\Huge\sffamily} % format applied to label+text
+{\Huge\MakeUppercase{\partname}\space\color{darkred}\thepart} % label
+{0.5em} % horizontal/vertical seperation between label and title body
+{\MakeUppercase} % before the title body
+[] % after the title body
+
+% appendix chapter format
+\titleformat{\chapter}[display] %
+{\sffamily} % format applied to label+text
+{\HUGE\filright\flushright\bfseries\thechapter} % label
+{1em} % horizontal/vertical seperation between label and title body
+{\huge\itshape\color{grey}} % before the title body
+[\normalcolor\vspace{0.33ex}{\titlerule[0.75pt]}] % after the title body
+
+% section format
+\titleformat{\section} %
+  {\large\fontseries{b}\selectfont\sffamily}% format applied to label+text
+  {\thesection}% label
+  {0.5em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+% subsection format
+\titleformat{\subsection} %
+  {\small\fontseries{b}\selectfont\sffamily} % format applied to label+text
+  {\thesubsection} % label
+  {0.3em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+% paragraph format
+\titleformat{\paragraph} %
+    {\large\sffamily\itshape} %
+    {\theparagraph} %
+    {0.2em} %
+    {\hspace{0.5em}}%
+    []%
+
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{40pt}
+
+%%%
+% geometry
+\geometry{
+	a4paper,
+	top=24.7mm,
+	bottom=24.7mm,
+	left=20mm, % left margin
+	textwidth=115mm, % main text block
+	marginparsep=6mm, % gutter between main text block and margin notes
+	marginparwidth=49mm % width of margin notes
+}
+
+%%
+% links
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=pinegreen, urlcolor=pinegreen, citecolor=pinegreen, linktocpage=true, breaklinks=true, bookmarksopen=true, backref=true}
+
+% intelligent page references
+\usepackage{varioref}
+
+%% bib
+\usepackage[%
+  backend      = biber,
+  backref      = true,
+  backrefstyle = none,
+  doi          = false,
+  url          = false,
+  giveninits   = true,
+  hyperref     = true,
+  sorting      = none,
+  style        = numeric-comp
+]{biblatex}
+
+\addbibresource{master.bib}
+
+
+\renewbibmacro{in:}{}
+% \renewcommand*{\backref}[1]{}
+% \renewcommand*{\backrefalt}[4]{%
+%     \ifcase #1 (Not cited.)%
+%     \or        (Cited on page~#2.)%
+%     \else      (Cited on pages~#2.)%
+%     \fi}
+
+%%
+% caption
+\usepackage{caption}
+\captionsetup{font={small}, textfont={sf}, labelfont={bf,sf}}
+
+\usepackage{subfig}   % since subcaption isn't compatible with tufte
+\captionsetup[subfigure]{position=top, singlelinecheck=off, justification=raggedright, textfont={bf}, labelfont={bf}}
+
+%%
+% maths and physics
+\usepackage{dsfont, amsmath, amssymb, amsfonts, mathtools, physics}
+
+%%
+% fonts settings
+\usepackage{fontspec}
+%%
+% language support
+\usepackage[english]{babel} % english support
+
+%% ornaments
+\usepackage{pgfornament}
+
+
+% Calligraphic first letter
+\usepackage{lettrine}
+\usepackage{GoudyIn}
+\renewcommand{\LettrineFontHook}{\color{darkred}\GoudyInfamily{}}
+
+
+%%
+% font families
+\usepackage[lite,subscriptcorrection,slantedGreek]{mtpro2}
+\renewcommand*{\rmdefault}{5bbj}% set osf after math loaded
+
+%\defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
+\setmainfont{AJensonPro-Regular}
+%\setsansfont{EB Garamond}
+\setsansfont{URW Classico}
+\setmonofont{inconsolata}
+
+\newfontfamily\mainfont{AJensonPro-Regular}
+\newfontfamily\sansfont{URW Classico}
+\newfontfamily\figurefont{URW DIN}
+\newfontfamily\monofont{inconsolata}
+
+%%
+\setcaptionfont{\sffamily\footnotesize}
+\setsidenotefont{\sffamily\footnotesize}
+\setmarginnotefont{\sffamily\footnotesize}
+\setcitationfont{\sffamily\footnotesize}
+
+%%
+% tikz %
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows,calc,math,angles,quotes}
+\usepackage{blochsphere}
+
+\pgfdeclarelayer{back}
+\pgfdeclarelayer{front}
+\pgfsetlayers{back,main,front}
+
+
+%%
+% SI units
+\usepackage{siunitx}
+
+
+\sisetup{%
+  mode = math,
+  detect-all,
+  exponent-product = \cdot,
+  number-unit-separator=\text{  },
+  output-decimal-marker={\text{.}},
+  math-rm=\mathsf,
+  text-rm=\normalfont,
+}
+
+%%
+% quantum circuits
+\usepackage{yquant}
+\useyquantlanguage{groups}
+\yquantdefinebox{vdots}[inner sep=0pt]{$\vdots$}
+\yquantdefinebox{dots}[inner sep=0pt]{$\dots$}
+
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+\newcommand{\ceil}[1]{\lceil#1\rceil}
+\newcommand{\bigO}[1]{\mathcal{O}(#1)}
+\newcommand{\uu}{\textsc{U2}\xspace}
+\newcommand{\cx}{\textsc{CX}\xspace}
+\newcommand{\cz}{\textsc{CZ}\xspace}
+\newcommand{\ccx}{\textsc{CCX}\xspace}
+\newcommand{\x}{\textsc{X}\xspace}
+\newcommand{\swap}{\textsc{SWAP}\xspace}
+
+% Inserts a Margolus target.
+\newcommand{\mtarg}{*+<.02em,.02em>{\xy ="i","i"-<.39em,0em>;"i"+<.39em,0em>
+**\dir{-}, "i"-<0em,.39em>;"i"+<0em,.39em>
+**\dir{-},"i"*\xycircle<.4em>{}*\xycircle<.5em>{} \endxy} \qw}
+
+%
+%% nice inline fractios
+\usepackage{nicefrac}
+
+%%
+% quotes
+\usepackage{csquotes}
+
+%%
+% epigram
+\makeatletter \newenvironment{epigram}[2][0.1em]
+  {\setlength{\@tempdima}{#1}%
+   \def\chapquote@author{#2}%
+   \itshape}
+  {\bigbreak\itshape\hfill---\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
+\makeatother
+
+%%
+% For nicely typeset tabular material
+\usepackage{booktabs}
+
+%%
+% For graphics / images
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+%%
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+%%
+% Prints a trailing space in a smart way.
+\usepackage{xspace}
+
+% Prints the month name (e.g., January) and the year (e.g., 2008)
+\newcommand{\monthyear}{%
+  \ifcase\month\or January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or
+  December\fi\space\number\year
+}
+
+% Inserts a blank page
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage}
+
+% Macros for typesetting the documentation
+\newcommand{\hlred}[1]{\textcolor{Maroon}{#1}}% prints in red
+\newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}}
+\newcommand{\hairsp}{\hspace{1pt}}% hair space
+\newcommand{\hquad}{\hskip0.5em\relax}% half quad space
+\newcommand{\TODO}{\textcolor{red}{\bf TODO! }\xspace}
+\newcommand{\ie}{\textit{i.\hairsp{}e.}\xspace}
+\newcommand{\etal}{et al.\xspace}
+\newcommand{\via}{\textit{via}\xspace}
+\newcommand{\eg}{\textit{e.\hairsp{}g.}\xspace}
+\newcommand{\na}{\quad--}% used in tables for N/A cells
+\providecommand{\XeLaTeX}{X\lower.5ex\hbox{\kern-0.15em\reflectbox{E}}\kern-0.1em\LaTeX}
+\newcommand{\tXeLaTeX}{\XeLaTeX\index{XeLaTeX@\protect\XeLaTeX}}
+
+%%
+% Generates glossary
+\usepackage[acronym,toc,shortcuts]{glossaries}
+
+%% fancy footers and header
+\usepackage{fancyhdr}
+\pagestyle{fancy} % allows for more advanced header and footer formats
+
+% Define headers
+\fancypagestyle{mainmatter}{
+    % Header and footer lines
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+
+    % Headers
+    \fancyhead{} % clear header field
+	\fancyhead[CE]{\small\sffamily\MakeUppercase\rightmark}
+    \fancyhead[CO]{\small\sffamily CHAPTER \thechapter. \MakeUppercase\leftmark}
+
+    % Foot
+    \fancyfoot{} % clear foot fields
+    \fancyfoot[CE, CO]{ \thepage } % here is where the page position is defined
+}
+
+%%
+% tikzit
+\usepackage{tikzit}
+\input{graphics/sample.tikzstyles}
+
+%%
+% Syntax highlighting
+\usepackage[outputdir=build]{minted}
+\usemintedstyle{lovelace}
+
+%%
+% Equation
+\newcommand{\labelEquation}[1]
+{%
+  % #1 = label
+  \label{eq:#1}%
+}
+
+\newcommand{\refEquation}[1]
+{%
+  % #1 = reference
+  Equation~(\vref{eq:#1})\xspace%
+}
+\newcommand{\refEquationOnly}[1]
+{%
+  % #1 = reference
+  Equation~(\ref{eq:#1})\xspace%
+}
+
+%%
+% Figures
+\newcommand{\labelFigure}[1]
+{%
+  % #1 = label
+  \label{fig:#1}%
+}
+
+\newcommand{\refFigure}[1]
+{%
+  % #1 = reference
+  \figurename~\vref{fig:#1}\xspace%
+}
+
+\newcommand{\refFigureOnly}[1]
+{%
+  % #1 = reference
+  \figurename~\ref{fig:#1}\xspace%
+}
+
+\newcommand{\refSubfigureOnly}[1]
+{%
+  % #1 = reference
+  \subref{fig:#1}\xspace%
+}
+
+%%
+% Tables
+\newcommand{\labelTable}[1]
+{%
+  % #1 = label
+  \label{tab:#1}%
+}
+
+\newcommand{\refTable}[1]
+{%
+  % #1 = reference
+  \tablename~\vref{tab:#1}\xspace%
+}
+
+\newcommand{\refTableOnly}[1]
+{%
+  % #1 = reference
+  \tablename~\ref{tab:#1}\xspace%
+}
+
+\newcommand{\refSubtableOnly}[1]
+{%
+  % #1 = reference
+  \subcaptionref{tab:#1}\xspace%
+}
+
+%%
+% Parts
+\newcommand{\labelPart}[1]
+{%
+  % #1 = label
+  \label{chap:#1}%
+}
+
+\newcommand{\refPart}[1]
+{%
+  % #1 = reference
+  Part~\vref{chap:#1}\xspace%
+}
+
+\newcommand{\refPartOnly}[1]
+{% Doesn't include the page referencing
+  % #1 = reference
+  Part~\ref{chap:#1}\xspace%
+}
+
+%%
+% Chapters
+\newcommand{\labelChapter}[1]
+{%
+  % #1 = label
+  \label{chap:#1}%
+}
+
+\newcommand{\refChapter}[1]
+{%
+  % #1 = reference
+  Chapter~\vref{chap:#1}\xspace%
+}
+
+\newcommand{\refChapterOnly}[1]
+{% Doesn't include the page referencing
+  % #1 = reference
+  Chapter~\ref{chap:#1}\xspace%
+}
+
+%%
+% Sections
+\newcommand{\labelSection}[1]
+{%
+  % #1 = label
+  \label{sec:#1}%
+}
+
+\newcommand{\refSection}[1]
+{%
+  % #1 = reference
+  §~\vref{sec:#1}\xspace%
+}
+
+\newcommand{\refSectionOnly}[1]
+{% Doesn't include the page referencing
+  % #1 = reference
+  §~\ref{sec:#1}\xspace%
+}
+
+%%
+% Appendices
+\newcommand{\labelAppendix}[1]
+{%
+  % #1 = label
+  \label{appen:#1}%
+}
+
+\newcommand{\refAppendix}[1]
+{%
+  % #1 = reference
+  Appendix~\vref{appen:#1}\xspace%
+}
+
+\newcommand{\refAppendixOnly}[1]
+{% Doesn't include the page referencing
+  % #1 = reference
+  Appendix~\ref{appen:#1}\xspace%
+}
+
+%%%%% miscellaneous commands %%%%
+
+%%
+% Prints argument within hanging parentheses (i.e., parentheses that take
+% up no horizontal space).  Useful in tabular environments.
+\newcommand{\hangp}[1]{\makebox[0pt][r]{(}#1\makebox[0pt][l]{)}}
+
+%%
+% Prints an asterisk that takes up no horizontal space.
+% Useful in tabular environments.
+\newcommand{\hangstar}{\makebox[0pt][l]{*}}
+
+% Disjoint union
+\newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+\newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+
+% A rotated \in
+\newcommand{\vin}{\mathbin{\text{\rotatebox[origin=c]{90}{$\in$}}}}
+
+% Complex conjugate
+\newcommand{\conj}[1]{\overline{#1}}
+
+% cos # + i sin #1
+%\newcommand{\cis}[1]{\cos\left(#1\right)+i\sin\left(#1\right)}
+\makeatletter
+\def\cis{\@ifnextchar[{\@withcis}{\@withoutcis}}
+\def\@withcis[#1]#2{%
+  \cos\left(#2\right)-i\sin\left(#2\right)
+}
+\def\@withoutcis#1{%
+  \cos\left(#1\right)+i\sin\left(#1\right)
+}
+
+%% Math operators
+
+% ceil
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+% floor
+%\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% set
+\DeclarePairedDelimiter\set{\{}{\}}
+
+% imaginary
+\DeclareMathOperator{\im}{im}
+
+% Identity function
+\DeclareMathOperator{\id}{id}
+
+% lcm
+\DeclareMathOperator{\mcm}{mcm}
+
+% Complex argument
+\DeclareMathOperator{\Arg}{Arg}
+
+% Sign of a function
+\DeclareMathOperator{\sgn}{sgn}
+
+% Degree of a polynomial
+\DeclareMathOperator{\degr}{deg}
+
+% Symmetric group
+\DeclareMathOperator{\Sym}{Sym}
+
+% Adjoint
+\DeclareMathOperator{\adj}{adj}
+
+% Diagonal matrix
+\DeclareMathOperator{\diag}{diag}
+
+\DeclareMathOperator{\defeq}{\vcentcolon=}
+\DeclareMathOperator{\eqdef}{=\vcentcolon}
+
+
+%% tikz definition %%
+\tikzstyle{odot}=[circle,inner sep=0pt,node contents={$\odot$},scale=2]
+\tikzstyle{spin}=[-triangle 45, thick]
+\tikzstyle{superpeers}=[draw,circle,left,text=black,scale=0.75]
+\tikzstyle{pole}=[circle, draw=gray, fill=white,inner sep=1.5]
+\tikzstyle{rot}=[->, thick, draw=awesomeitshape]

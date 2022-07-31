@@ -1,0 +1,277 @@
+\chapter{Appendix A}
+\labelAppendix{appendix_A}
+
+\section{IBM Quantum Experience}
+\labelSection{ibm_q_experience}
+
+The experiments in this thesis were conducted on the IBM Quantum Experience \textbf{ibmq\_montreal}, \textbf{ibmq\_mumbai}, \textbf{ibm\_hanoi}, \textbf{ibmq\_toronto} and \textbf{ibmq\_casablanca} processors through the software development kit Qiskit~\cite{Qiskit}. Each experiment reported was conducted on the date shown in the table below.
+
+\begin{table}[hbt]
+  \centering
+  \resizebox{1.0\textwidth}{!}{%
+  \begin{tabular}{ll}
+    \toprule
+    Experiment & Date \\
+    \midrule
+    Compiled quantum order-finding on \textbf{ibmq\_casablanca}  & 2020/12/03 \\
+    State tomography on \textbf{ibmq\_casablanca}                & 2020/12/04 \\
+    Verification of entanglement on \textbf{ibmq\_casablanca}    & 2020/12/04 \\
+    Compiled quantum order-finding on \textbf{ibmq\_toronto}     & 2020/12/06 \\
+    Verification of entanglement on \textbf{ibmq\_toronto}       & 2020/12/07 \\
+    State tomography on \textbf{ibmq\_toronto}                   & 2020/12/16 \\
+	Original and improved \acs{max-cut} problem with on \textbf{ibm\_hanoi}    & 2021/08/31 \\
+	Original and improved \acs{max-cut} problem with on \textbf{ibm\_montreal} & 2021/11/07 \\
+	Truth tables for measurement-based controlled-controlled-Z gate on \textbf{ibm\_montreal} & 2021/11/07 \\
+Truth tables for measurement-based controlled-controlled-Z gate on \textbf{ibm\_mumbai} & 2021/11/20 \\
+    \bottomrule
+  \end{tabular}
+	}
+  \caption{
+    Dates of experiments on IBM Q processors.
+  }
+  \labelTable{exps_dates}
+\end{table}
+
+\noindent
+For instance, when characterizing the compiled quantum order-finding, experiments were submitted in batches of $900$ circuits with each circuit having $8192$ measurement shots, hence in total, $900\times8192$ measurement shots. In choosing the qubit device mappings shown in the main text, preference was given to the qubit pairs with relatively small controlled-NOT error rates.~\refTableOnly{errors_toronto} and~\refTableOnly{errors_casablanca} show reported single qubit-error rates for \textbf{ibmq\_toronto} and \textbf{ibmq\_casablanca} respectively, where $U2(\phi, \lambda) = R_z(\phi)R_y(\pi/2)R_z(\lambda)$.~\refTableOnly{cx_errors} shows the controlled-NOT error rates for the two processors used in the compiled quantum order-finding. The dates of the experiments are given in the captions. In the rest of the experiments, preference is similarly given to qubits with relatively small controlled-NOT error gates if the choice is between qubits with a similar connectivity, and we override this preference in the cases where one qubit has better connectivity than another.
+
+\begin{table}[hbt]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+         & \uu gate error rate ($10^{-2}$) & Readout error rate ($10^{-4}$) \\
+    \midrule
+      Q0 & 6.010 & 4.39  \\
+      Q1 & 3.14  & 2.12  \\
+      Q2 & 2.98  & 1.96  \\
+      Q3 & 0.930 & 5.74  \\
+      Q4 & 1.34  & 2.097 \\
+    \bottomrule
+  \end{tabular}
+  \caption{
+    Reported single-qubit gate errors on 16 December 2020. 
+  }
+  \labelTable{errors_toronto}
+\end{table}
+
+
+\begin{table}[hbt]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    & \uu gate error rate ($10^{-2}$) & Readout error rate ($10^{-4}$) \\
+    \midrule
+      Q0 & 2.16e-2  & 2.18  \\
+      Q1 & 1.31e-2  & 4.042 \\
+      Q2 & 1.54e-2  & 2.78  \\
+      Q3 & 9.30e-2  & 2.62  \\
+      Q4 & 1.67e-2  & 4.96  \\
+    \bottomrule
+  \end{tabular}
+  \caption{
+    Reported single-qubit gate errors on 06 December 2020. 
+  }
+  \labelTable{errors_casablanca}
+\end{table}
+
+% \begin{table}[hbt]
+%   \centering
+%   \begin{tabular}{lll}
+%     \toprule
+%     & $\sqrt{X}$ gate error rate & Readout error rate \\
+%     \midrule
+%       Q3 & 0.0001898842837349108  & \SI{2.18e-4}{}  \\
+%       Q2 & 0.00019983332746464832 & \SI{4.042e-4}{} \\
+%       Q2 & 0.00015374095128292434 & \SI{2.78e-4}{}  \\
+%       Q3 & 0.00013360009723497435  & \SI{2.62e-4}{}  \\
+%     \bottomrule
+%   \end{tabular}
+%   \caption{
+%     Reported single-qubit gate errors on 06 December 2020. 
+%   }
+%   \labelTable{errors_hanoi} \\
+% \end{table}
+
+\bigskip
+
+\begin{table}[hbt]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    & \textbf{ibmq\_toronto} ($10^{-3}$) & \textbf{ibmq\_casablanca} ($10^{-2}$) \\
+    \midrule
+      \cx(0,1) & 6.620e-3  & 0.9126  \\
+      \cx(1,4) & 8.214e-3  & 1.114  \\
+      \cx(2,1) & 7.152e-3  & 0.7446  \\
+      \cx(3,2) & 6.824e-3  & 1.337  \\
+    \bottomrule
+  \end{tabular}
+  \caption{
+    Reported controlled-NOT gate errors on 06 December (\textbf{ibmq\_casablanca}) and 16 December (\textbf{ibmq\_toronto}) 2020.
+  }
+  \labelTable{cx_errors}
+\end{table}
+
+\bigskip
+\noindent
+Qiskit's \acs{QST} fitter uses a least-squares fitting to find the closest density matrix described by Pauli measurement results~\cite{Smolin_2012}. On an $n$-qubit system, the fitter requires measurement results from executing $3^n$ circuits. This makes \acs{QST} on large circuits in impractical. Thus only $30$ \acs{QST} experiments were performed for the three control register qubits and in total $3^3 \times 30 \times 8192$ measurement were made.
+
+\bigskip
+\noindent
+In reducing the effect of noise due to final measurement errors, Qiskit recommends a measurement error mitigation approach. The approach starts off by creating circuits that each perform a measurement of the $2^n$ basis states. The measurement counts of the $2^n$ basis state measurements are put into a column vector $C_{noisy}$, arranged in ascending order by the value of their measurement bitstring, {\it i.e.} $00\ldots00$ is the first element, the next is $00\ldots01$ and so on. The approach assumes that there is a matrix $M$ called the calibration matrix, such that
+
+\begin{align}
+  C_\text{noisy} &= M C_\text{ideal},
+\end{align}
+
+\noindent
+where $C_\text{ideal}$ is a column vector of measurement counts in the absence of noise. If $M$ is invertible then, then $C_\text{noisy}$  can transformed into $C_\text{ideal}$ by finding $M^{-1}$
+
+\begin{align}
+  C_\text{ideal} &=  M^{-1}C_\text{noisy}.
+\end{align}
+
+\noindent
+Qiskit~\cite{Qiskit_errormit} uses a least-squares fit to calculate an approximate $M^{-1}$ by some other matrix $\tilde{M}^{-1}$, as in general $M$ is not invertible, giving
+
+\begin{align}
+  C_\text{mitigated} &=  \tilde{M}^{-1}C_\text{noisy}.
+\end{align}
+
+\noindent
+The entries of the column vector $C_\text{mitigated}$ correspond to the mitigated measurement counts in same order as before. The entirety of the results reported in our work make use of this approach.
+
+\clearpage
+\section{Error bars}
+\labelSection{error_bars}
+
+The bootstrap resampling method is a statistical method dealing with a non-parametric estimation of mean, variances, and  measures of error
+~\cite{Efron_1979,Efron_1982}. Suppose we have a sample of $n$ independent random variables from an unknown discrete distribution $P$
+
+\begin{align}
+    X_1, X_2 , \cdots X_n \stackrel{\text{iid}}{\sim} P
+\end{align}
+
+\noindent
+Having observed values $x_1, x_2, \cdots x_n$, we wish to compute some estimate $\hat{\theta}(X)$ and subsequently the variance and error of this estimate. The bootstrap gives a procedure for this, which can be summarized in the following steps~\cite{Efron_1979,Efron_1982}.
+
+\bigskip
+\noindent
+Assign a equal probability to each observed data point $x_i = \frac{1}{n}$, and then proceed to randomly draw with replacement from the observed values to get a new sample
+
+\begin{align}
+    X_1^{*}, X_2^{*}, \cdots , X_n^{*}
+\end{align}
+
+\noindent
+Then one computes $\hat{\theta}^{*} = \hat{\theta}(X_1^{*}, X_2^{*}, \cdots, X_n^{*})$, then independently repeat the random sampling to a desired number of iterations $B$. From this we collect a set of $B$ bootstrapped values of the estimate $\hat{\theta}^{*^1},\hat{\theta}^{*^2}, \cdots, \hat{\theta}^{*^B}$ and the mean of the bootstrapped values is calculated in the standard fashion as  $\hat{\theta}^{*} = B^{-1}\sum_{b=1}^B \hat{\theta}^{*^b}$. We are now in a position to calculate the variance of the estimate
+
+\begin{align}
+    \hat{\sigma}^2_{\hat{\theta}} = \frac{1}{B-1} \displaystyle\sum_{b=1}^{B}\{\hat{\theta}^{*^b}  -
+\hat{\theta}^{*} \}^2.
+\end{align}
+
+\noindent
+The reason why we consider using the bootstrap resampling method to estimate quantities such as the variance and standard error instead of naively calculating the variance from the original observed values is because the sample size is fairly small for statistical inference. The bootstrap resampling method provides a way to account for the some of behavior of the full unknown distribution that may not be represented in a specific sample~\cite{Efron_1979,Efron_1982}. All the confidence intervals of the data presented here were established \via the above non-parametric bootstrap resampling techniques. In order to place the constraint that the measurement counts should sum to the number of experimental shots, a sample contains data as column vectors of outcomes of some experiment. In each round, the resampling draws entire column vectors whose elements respect the aforementioned constraint. For each outcome across the column vectors, mean estimates are obtained and a confidence interval around the estimates can be appropriately constructed. 
+
+\bigskip
+\noindent
+To elucidate the above, consider the following example. Consider the outcomes of a two-qubit experiment with experimental shots of $8192$ repeated $4$ times, as shown in~\refTableOnly{bootstrap_example}.
+
+\clearpage
+
+\begin{table}[hbt]
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{lllll}
+    \toprule
+    Outcomes & \multicolumn{3}{c}{Counts} \\
+    \midrule
+     & Exp. 1 & Exp. 2 & Exp. 3 & Exp. 4 \\
+    \midrule
+    00 & 2335 & 2208 & 2406 & 2203\\ 
+    01 & 665  & 690  & 633  & 656 \\ 
+    10 & 183  & 100  & 197  & 177 \\
+    11 & 5009 & 5192 & 4956 & 5156 \\
+    \bottomrule
+  \end{tabular}
+  \caption{
+      Example data for a two-qubit experiment repeated $4$ times for illustrating how bootstrap resampling was done.
+  }
+  \labelTable{bootstrap_example}
+\end{table}
+
+\bigskip
+
+\noindent
+Suppose we resampled the experiments $1,1,2,4$ from~\refTableOnly{bootstrap_example}, making a bootstrap sample of size $5$.
+
+\begin{align}
+    B = [[2335, 665, 183, 5009], \nonumber \\
+         [2335, 665, 183, 5009], \nonumber \\
+         [2208, 690, 100, 5192],\nonumber \\
+         [2203, 656, 177, 5156]].
+\end{align}
+
+\noindent
+From this, we can obtain appropriately the bootstrap sample for each outcome (corresponding to an index), {\it e.g.} the bootstrap sample for the outcomes at index $0$ (outcome 00) is
+\begin{align}
+    B_{0} = [2335, 2335, 2208, 2203].
+\end{align}
+
+\noindent
+The bootstrap mean estimates and confidence intervals can then be performed for each outcome while respecting the constraint of the measurement counts summing up to the total number of experimental shots.
+
+\section{Pauli measurements}
+\labelSection{pauli_measurements}
+
+As an example, consider the measurement of the Pauli expectation value $\expval{ZZZZZ}$. Let $p_{ijklm}$ denote the probability for a computational basis measurement $\{\ket{0}, \ket{1}\}$ of five qubits to output the binary string $ijklm$, {\it i.e.} $p_{00000}$ denotes the probability to measure all the qubits in $\ket{0}$ state. To calculate $\expval{ZZZZZ}$ we can combine these probabilities as given in the equation below
+
+\begin{align}
+    \labelEquation{zzzzz}
+    \expval{ZZZZZ} &= p_{00000} - p_{00010} - p_{00100} + p_{00101} + p_{00110} - p_{01000} + p_{01001} \nonumber \\
+				   & \quad\> + p_{01010} + p_{01100} - p_{01101} - p_{01110} + p_{01111} - p_{10000} + p_{10001} \nonumber \\
+				   & \quad\> + p_{10010} - p_{10011} + p_{10100} - p_{10101} - p_{10110} + p_{10111} + p_{11000} \nonumber \\
+				   & \quad\> - p_{11001} - p_{11010} + p_{11011} - p_{11100} + p_{11101} + p_{11110} - p_{11111}.
+\end{align}
+
+\noindent
+Similarly, the expectation $\expval{IZIZI}$ is given by
+
+\begin{align}
+    \label{izizi}
+    \expval{IZIZI} &= p_{00000} - p_{00010} + p_{00100} + p_{00101} - p_{00110} - p_{01000} - p_{01001} \nonumber \\
+				   &\quad\> + p_{01010} - p_{01100} - p_{01101} + p_{01110} + p_{01111} + p_{10000} + p_{10001} \nonumber \\
+				   &\quad\> - p_{10010} - p_{10011} + p_{10100} + p_{10101} - p_{10110} - p_{10111} - p_{11000} \nonumber \\
+				   &\quad\> - p_{11001} + p_{11010} + p_{11011} - p_{11100} - p_{11101} + p_{11110} + p_{11111}.
+\end{align}
+
+\noindent
+However, the terms in the equation above are given by the marginalization of the distribution measured in~\refEquationOnly{zzzzz} across the outcome space of qubits $1$, $3$ and $5$. By considering all such marginalizations of the distribution in~\refEquationOnly{zzzzz}, we obtain the set of Pauli expectation values that can be derived from a measurement of $\expval{ZZZZZ}$, namely
+
+\begin{align}
+  \{\> & ZZZZI, ZZZIZ, ZZZII, ZZIZZ, ZZIZI, ZZIIZ, ZZIII, \nonumber \\
+	   & ZIZZZ, ZIZZI, ZIZIZ, ZIZII, ZIIZZ, ZIIZI, ZIIIZ, \nonumber \\
+	   & ZIIII, IZZZZ, IZZZI, IZZIZ, IZZII, IZIZZ, IZIZI,\nonumber \\
+	   & IZIIZ, IZIII, IIZZZ, IIZZI, IIZIZ, IIZII, IIIZZ, \nonumber \\
+	   & IIIZI, IIIIZ \>\}.
+\end{align}
+
+\noindent
+After applying what is described above to the Pauli decomposition of the ideal state $\rho=\ketbra{\Psi}{\Psi}$, we reduce the number of terms that we need to measure from $293$ to $79$ terms, as given below
+\begin{align}
+\{\> & XXXXZ, XXXZX, XXXZZ, XXYYZ, XXYZY, XXZXX, XXZXZ, \nonumber \\
+     & XXZYY, XXZZX, XYXYZ, XYXZY, XYYXZ, XYYZX, XYYZZ, \nonumber \\
+	 & XYZXY, XYZYX, XYZYZ, XYZZY, XZXXX, XZXYY, XZXZZ, \nonumber \\
+	 & XZYXY, XZYYX, XZZXZ, XZZZX, YXXYZ, YXXZY, YXYXZ, \nonumber \\
+	 & YXYZX, YXYZZ, YXZXY, YXZYX, YXZYZ, YXZZY, YYXXZ, \nonumber \\
+	 & YYXZX, YYXZZ, YYYYZ, YYYZY, YYZXX, YYZXZ, YYZYY, \nonumber \\
+	 & YYZZX, YZXXY, YZXYX, YZYXX, YZYYY, YZYZZ, YZZYZ, \nonumber \\
+	 & YZZZY, ZXXXZ, ZXXZX, ZXXZZ, ZXYYZ, ZXYZY, ZXZXX, \nonumber \\
+	 & ZXZXZ, ZXZYY, ZXZZX, ZYXYZ, ZYXZY, ZYYXZ, ZYYZX, \nonumber \\ 
+	 & ZYYZZ, ZYZXY, ZYZYX, ZYZYZ, ZYZZY, ZZXXX, ZZXXZ, \nonumber \\ 
+	 & ZZXYY, ZZXZX, ZZYXY, ZZYYX, ZZYYZ, ZZYZY, ZZZXX, \nonumber \\
+	 & ZZZYY, ZZZZZ \>\}.
+\end{align}
+
+

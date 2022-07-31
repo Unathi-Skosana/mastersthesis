@@ -1,0 +1,168 @@
+\chapter{Appendix C}
+\labelAppendix{appendix_C}
+
+\section{Postselection scaling}
+\labelSection{postselection_scaling}
+
+In order to do mid-circuit measurements and post select the outcomes, we need to know the basis to measure in for each of the qubits. Looking at~\refFigureOnly{improved_circ}, one would need to measure qubit $1$ (or the first iteration in the recycling case) in the $\{ \ket{+},\ket{-}\}$ basis (since there is Hadamard gate $H$ on acting qubit 1 before the $Z$-basis measurement), then qubit $2$ (or the second iteration in the recycling case) in either the $\{ S^{\dagger}\ket{+},S\ket{-}\}$ (if our measurement outcome on qubit 1 was $\ket{+}$) or $\{ \ket{+},\ket{-}\}$ basis, then qubit $3$ in either the $\{ T^{\dagger}S^{\dagger}\ket{+},TS\ket{-}\}$, $\{ S^{\dagger}\ket{+},S\ket{-}\}$ or $\{ \ket{+},\ket{-}\}$ basis. Thus, the number of measurements needed scales as $n!$, which grows faster than an exponential with constant base, e.g. $2^n$. So in general the speed up gained would be lost for general factoring using a post selection method, \ie factoring numbers larger than $21$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Effect of relative phase Toffolis}
+\labelSection{effect_of_relative_toffolis}
+
+Below we show the compiled circuit for the period-finding routine and label specific instances during the evolution of the computation. The aim is to show the invariance of the computation when replacing Toffoli gates with relative phase Toffoli gates that use fewer resources.  
+
+\begin{figure}[hbt]
+    \centering
+	\resizebox{1.0\textwidth}{!}{%
+	\begin{tikzpicture}
+		\begin{yquant}[register/separation=2mm]
+			qubit {$\ket{\reg_{\idx}}$} c[3];
+			qubit {$\ket{\reg_{\idx}}$} q[2];
+
+			h c;
+			[darkred, thick, label=$\ket{\Psi_0}$]
+			barrier (-);
+			cnot q[1] | c[2];
+			cnot q[1] | c[1];
+			[darkred, thick, label=$\ket{\Psi_1}$]
+			barrier (-);
+			cnot q[0] | q[1];
+			box {$M$} q[1] | c[1], q[0];
+			cnot q[0] | q[1];
+			[darkred, thick, label=$\ket{\Psi_2}$]
+			barrier (-);
+			x q[1];
+			box {$M$} q[0] | c[0], q[1];
+			x q[1];
+			[darkred, thick, label=$\ket{\Psi_3}$]
+			barrier (-);
+			cnot q[0] | q[1];
+			box {$M$} q[1] | c[0], q[0];
+			cnot q[0] | q[1];
+
+			box {$QFT^{\dagger}$} (c);
+			measure c;
+		\end{yquant}
+	\end{tikzpicture}
+	}
+    \caption{States in both registers at various points during the execution of the circuit.}
+    \labelFigure{checkpoints}
+\end{figure}
+
+\clearpage
+\noindent
+The states at various points of the evolution are given explicitly as
+
+\begin{align}
+    \ket{\Psi_0} &= \ket{+}_{c_0}\ket{+}_{c_1}\ket{+}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1}, \nonumber \\ \nonumber \\
+    \ket{\Psi_1} &= \ket{+}_{c_0}(\ket{0}_{c_1}\ket{0}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1} + \ket{0}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{1}_{q_1} + \nonumber \\ 
+                 &\>\qquad\qquad \ket{1}_{c_1}\ket{0}_{c_2}\ket{0}_{q_0}\ket{1}_{q_1} + \ket{1}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1}), \nonumber \\ \nonumber \\
+    \ket{\Psi_2} &= \ket{0}_{c_0}\ket{0}_{c_1}\ket{0}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1} + \ket{0}_{c_0}\ket{0}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{1}_{q_1} + \nonumber \\
+                 &\>\>\quad \ket{0}_{c_0}\ket{1}_{c_1}\ket{0}_{c_2}\ket{1}_{q_0}\ket{0}_{q_1} + \ket{0}_{c_0}\ket{1}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1} + \nonumber \\
+                 &\>\>\quad \ket{1}_{c_0}\ket{0}_{c_1}\ket{0}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1} + \ket{1}_{c_0}\ket{0}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{1}_{q_1} + \nonumber \\
+                 &\>\>\quad \ket{1}_{c_0}\ket{1}_{c_1}\ket{0}_{c_2}\ket{1}_{q_0}\ket{0}_{q_1} + \ket{1}_{c_0}\ket{1}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1}, \nonumber \\ \nonumber \\
+    \ket{\Psi_3} &= \ket{0}_{c_0}\ket{0}_{c_1}\ket{0}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1} + \ket{0}_{c_0}\ket{0}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{1}_{q_1} + \nonumber \\
+                 &\>\>\quad\ket{0}_{c_0} \ket{1}_{c_1}\ket{0}_{c_2}\ket{1}_{q_0}\ket{0}_{q_1} + \ket{0}_{c_0}\ket{1}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1} + \nonumber \\
+                 &\>\>\quad\ket{1}_{c_0}\ket{0}_{c_1}\ket{0}_{c_2}\ket{1}_{q_0}\ket{0}_{q_1} + \ket{1}_{c_0}\ket{0}_{c_1}\ket{1}_{c_2}\ket{0}_{q_0}\ket{1}_{q_1} + \nonumber \\ 
+                 &\>\>\quad\ket{1}_{c_0}\ket{1}_{c_1}\ket{0}_{c_2}\ket{0}_{q_0}\ket{0}_{q_1} + \ket{1}_{c_0}\ket{1}_{c_1}\ket{1}_{c_2}\ket{1}_{q_0}\ket{0}_{q_1}.
+\end{align}
+
+\noindent
+Looking at the state $\ket{\Psi_1}$, one can see that none of its constituent states is transformed into $\ket{1}_{c_1}\ket{0}_{q_0}\ket{1}_{q_1}$ by the CX gate that follows, since the state $\ket{1}_{c_1}\ket{1}_{q_0}\ket{1}_{q_1}$ that would be transformed to the former is not present in $\ket{\Psi_1}$. Thus the relative phase Toffoli gate does not affect the phase in the registers. Similarly for $\ket{\Psi_2}$, the state $\ket{1}_{c_0}\ket{1}_{q_0}\ket{0}_{q_1}$ is not present when the subsequent relative phase Toffoli gate is applied because the state $\ket{1}_{c_0}\ket{1}_{q_0}\ket{1}_{q_1}$ is absent from the register for $\ket{\Psi_2}$ and this is needed when $\hat{X}$ is applied to qubit $q_1$. The scenario for $\ket{\Psi_3}$ is the same as that of $\ket{\Psi_1}$, the only difference is the control is now $c_0$. The Margolus gates in this particular quantum circuit never encounter the basis state $\ket{101}$, thus the operation of the circuit remains unchanged by the replacement of full Toffoli gates with their respective relative phase counterparts.
+
+\clearpage
+\section{Maximum overlap with respect to the bipartitions}
+\labelSection{maximum_overlap_wrt_bipartitions}
+
+The values listed below were obtained using the software package QUBIT4MATLAB~\cite{Toth_2008}. Here, $\ket{\phi}$ is a pure biseparable state in some defined bipartite partition (bipartition), \emph{i.e.} a separable product state with respect to this bipartition, and $\ket{\Psi}$ is the ideal state in both the control and work registers preceding the application of the QFT to the control register.
+
+\begin{align}
+    \underset{\phi \in \{(c_1)(c_0c_2q_0q_1)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.500, \nonumber \\
+    \underset{\phi \in \{(c_2)(c_0c_1q_0q_1)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.500, \nonumber \\
+    \underset{\phi \in \{(q_0)(c_0c_1c_2q_1)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.750, \nonumber \\
+    \underset{\phi \in \{(q_1)(c_0c_1c_2q_0)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.625, \nonumber \\
+    \underset{\phi \in \{(c_0c_1)(c_2q_0q_1)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.500, \nonumber \\
+    \underset{\phi \in \{(c_0c_2)(c_1q_0q_1)\}}{\max}\abs{\braket{\phi}{\Psi }}^{2} &= 0.500, \nonumber \\
+    \underset{\phi \in \{(c_0q_0)(c_1c_2q_1)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.427, \nonumber \\
+    \underset{\phi \in \{(c_0q_1)(c_1c_2q_0)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.570, \nonumber \\
+    \underset{\phi \in \{(q_0q_1)(c_0c_1c_2)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.375, \nonumber \\
+    \underset{\phi \in \{(c_0q_1)(c_0c_1q_0)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.570, \nonumber \\
+    \underset{\phi \in \{(c_1q_1)(c_0c_2q_0)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.570, \nonumber \\
+    \underset{\phi \in \{(c_1q_0)(c_0c_2q_1)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.427, \nonumber \\
+    \underset{\phi \in \{(c_2q_0)(c_0c_1q_1)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.427, \nonumber \\
+    \underset{\phi \in \{(c_1c_2)(c_0q_0q_1)\}}{\max}\abs{\braket{ \phi}{\Psi }}^{2} &= 0.500.
+\end{align}
+
+\noindent
+For a given separation of the qubits into two partitions (a bipartition), {\it e.g.} $(c_1)(c_0c_2q_0q_1)$, there is a pure product state $\ket{\phi}$ with respect to these partitions, {\it i.e.} no entanglement between the partitions, that maximizes the overlap squared with the ideal state. The value of the overlap squared between this product state and the ideal state, {\it e.g.} 0.5, is therefore the highest value that can be obtained for an separable state between the partitions. Thus, if a given state has an overlap squared larger than 0.5 it must be an entangled state with respect to the partitions. The value of the maximum overlap squared changes for the different partitions chosen as it depends on the structure of the ideal state. The above results extend to mixed states across the bipartitions due to the convex sum nature of quantum states~\cite{Toth_2008}.
+
+\clearpage
+\section{Continued fractions and convergents}
+\labelSection{continued_fractions}
+
+A $2L + 1$ bit rational number $\varphi$ is said to have a continued fraction expansion if it can be written as
+
+\begin{align}
+    \varphi \equiv [a_0, a_1, \ldots, a_n] \equiv a_0 + \frac{1}{a_1 + \frac{1}{a_2 +  \frac{1}{\cdots + \frac{1}{a_n}}}},
+\end{align}
+
+\noindent
+where $n$ is a finite integer and the $a_i$'s are integers. Additionally, if $\varphi < 1$, we have $a_0 = 0$. The convergents of the continued fraction expansion are the rationals,
+
+\begin{align}\labelEquation{convergents}
+    a_0, a_0 + \frac{1}{a_1}, a_0 + \frac{1}{a_1 + \frac{1}{a_2}}, \cdots
+\end{align}
+
+\noindent
+If a rational number $s/r$ satisfies the following inequality
+
+\begin{align}
+    \abs{\frac{s}{r} - \varphi} \leq \frac{1}{2r^2},
+\end{align}
+
+\noindent
+then $s/r$ will appear as a convergent in the continued fraction expansion of $\varphi$. If $\varphi$ is an approximation of $s/r$ accurate to $2L + 1$ bits, then we have $\abs{s/r - \varphi} \leq 1/2^{2L + 1}$. For $r \leq N \leq 2^L$, we have that $1/2^{2L + 1} \leq 1/2r^2$. Therefore, since the inequality holds for the approximation $\varphi$, there is a classical algorithm that can compute the convergents of $\varphi$, and produce integers $s', r'$ such that $\text{gcd}(s', r') = 1$ in $\bigO{L^3}$ operations~\cite{Mike&Ike}. We can then check if $r'$ is the order of $x$ and $N$ by testing whether $x^{r'}\>\text{mod}\>N = 1$. Note that in our approach, $\varphi=\varphi_s/2^n\simeq s/r$ is not an approximation that is accurate to $2L+1$ bits as above, but is a further approximation of $s/r$ depending on the resolution, {\it i.e.} the number of iterations, or alternatively qubits in the control register.
+
+\bigskip
+\noindent
+Consider the following example of the final measurement outcomes from~\refFigureOnly{shor_outcomes} in the main text, where the outcomes $\ket{110} = \ket{6}$ and $\ket{101} = \ket{5}$ are peaked in the outcome distribution and we have used the integer representation of the binary outcome. The former outcome gives $\varphi = \frac{6}{2^3}$ and latter gives $\varphi = \frac{5}{2^3}$. Computing the continued fractions of the former gives
+
+\begin{align}
+    \frac{6}{8} &= \frac{3}{4}, \nonumber \\
+    \frac{3}{4} &= 0 + \frac{1}{\frac{4}{3}}, \nonumber \\
+    \frac{3}{4} &= 0 + \frac{1}{1 + \frac{1}{3}}.
+\end{align}
+
+\noindent
+Thus
+
+\begin{align}
+    \frac{6}{8} = [0, 1, 3].
+\end{align}
+
+\clearpage
+\noindent
+Computing the convergents according to~\refEquationOnly{convergents} gives $0, 1, 3/4$. On the other hand, computing the continued fractions of the latter $\varphi$ gives
+
+\begin{align}
+    \frac{5}{8} &= 0 + \frac{1}{\frac{8}{5}}, \nonumber \\
+    \frac{5}{8} &= 0 + \frac{1}{1 + \frac{3}{5}}, \nonumber \\
+    \frac{5}{8} &= 0 + \frac{1}{1 + \frac{1}{\frac{5}{3}}}, \nonumber \\
+    \frac{5}{8} &= 0 + \frac{1}{1 + \frac{1}{1 + \frac{2}{3}}}, \nonumber \\
+    \frac{5}{8} &= 0 + \frac{1}{1 + \frac{1}{1 + \frac{1}{\frac{3}{2}}}}, \nonumber \\
+    \frac{5}{8} &= 0 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{2}}}}.
+\end{align}
+
+\noindent
+The above calculation gives the following continued fractions expansion 
+
+\begin{align}
+    \frac{5}{8} = [0, 1, 1, 1, 2].
+\end{align}
+
+\noindent
+Computing the convergents gives $0, 1, 1/2, 2/3, 5/8$. Looking at the former and latter computed convergents, we note that the fourth convergent of the latter correctly gives $r' = 3$ while the convergents of the former do not give the correct order when tested using $x^{r'}\>\text{mod}\>N = 1$.

@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=empty white blue] (0) at (-1, 1) {3};
+		\node [style=empty white blue] (1) at (4, 0) {$0$};
+		\node [style=empty white indigo] (2) at (-1, -1) {$2$};
+		\node [style=empty white indigo] (3) at (1.5, 1) {$4$};
+		\node [style=empty white blue] (4) at (1.5, -1) {$1$};
+		\node [style=none] (5) at (-2, -1.75) {};
+		\node [style=none] (6) at (2.75, 2) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 3] (0) to (3);
+		\draw [style=new edge style 3] (0) to (2);
+		\draw [style=new edge style 3] (2) to (4);
+		\draw [style=new edge style 3] (4) to (1);
+		\draw [style=new edge style 3] (1) to (3);
+		\draw [style=new edge style 3] (4) to (3);
+		\draw [style=new edge style 4, bend right=90, looseness=0.50] (5.center) to (6.center);
+		\draw [style=new edge style 4, bend left=270, looseness=0.50] (6.center) to (5.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

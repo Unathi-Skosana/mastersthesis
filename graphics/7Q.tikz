@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=empty white indigo] (27) at (-2, 0) {};
+		\node [style=empty white indigo] (28) at (0, 0) {};
+		\node [style=empty white indigo] (29) at (2, 0) {};
+		\node [style=empty white indigo] (30) at (2, 2) {};
+		\node [style=empty white indigo] (31) at (2, -2) {};
+		\node [style=empty white indigo] (32) at (-2, -2) {};
+		\node [style=empty white indigo] (33) at (-2, 2) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 1] (29) to (28);
+		\draw [style=new edge style 1, in=90, out=-90] (30) to (29);
+		\draw [style=new edge style 1] (29) to (31);
+		\draw [style=new edge style 1] (28) to (27);
+		\draw [style=new edge style 1] (27) to (32);
+		\draw [style=new edge style 1] (27) to (33);
+	\end{pgfonlayer}
+\end{tikzpicture}

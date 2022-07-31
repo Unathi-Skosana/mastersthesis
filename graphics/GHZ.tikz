@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=white indigo] (0) at (-34, 3) {$1$};
+		\node [style=dashed white indigo] (1) at (-32.5, 1.5) {$2$};
+		\node [style=white indigo] (3) at (-31, 3) {$3$};
+		\node [style=white indigo] (4) at (-29, 3) {$1$};
+		\node [style=white indigo] (5) at (-27.5, 1.5) {$2$};
+		\node [style=white indigo] (6) at (-26, 3) {$3$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 1] (0) to (1);
+		\draw [style=new edge style 1] (1) to (3);
+		\draw [style=new edge style 2] (3) to (0);
+		\draw [style=new edge style 1] (4) to (5);
+		\draw [style=new edge style 1] (5) to (6);
+		\draw [style=new edge style 1, in=360, out=180] (6) to (4);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=empty white indigo] (0) at (0, 0) {$0$};
+		\node [style=empty white indigo] (1) at (5, 2) {$1$};
+		\node [style=empty white indigo] (2) at (5, 0) {$2$};
+		\node [style=empty white indigo] (3) at (5, -2) {$3$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 3] (0) to (1);
+		\draw [style=new edge style 3] (0) to (2);
+		\draw [style=new edge style 3] (0) to (3);
+	\end{pgfonlayer}
+\end{tikzpicture}

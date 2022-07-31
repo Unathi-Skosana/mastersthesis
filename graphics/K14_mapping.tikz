@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=empty white indigo] (0) at (0, 0) {};
+		\node [style=empty white indigo] (1) at (-2, 0) {};
+		\node [style=empty white indigo] (2) at (2, 0) {};
+		\node [style=empty white indigo] (3) at (0, -2) {};
+		\node [style=empty white indigo] (4) at (0, -4) {};
+		\node [style=empty white indigo] (5) at (0, 0) {$a$};
+		\node [style=empty white indigo] (6) at (-2, 0) {$1$};
+		\node [style=empty white indigo] (7) at (2, 0) {$2$};
+		\node [style=empty white indigo] (8) at (0, -2) {$3$};
+		\node [style=empty white indigo] (9) at (0, -4) {4};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 3] (6) to (5);
+		\draw [style=new edge style 3] (5) to (7);
+		\draw [style=new edge style 3] (5) to (8);
+		\draw [style=new edge style 3] (8) to (9);
+	\end{pgfonlayer}
+\end{tikzpicture}

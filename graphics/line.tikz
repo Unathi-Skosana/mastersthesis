@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=white indigo] (0) at (0, 0) {$2$};
+		\node [style=white indigo] (1) at (-2, 0) {$1$};
+		\node [style=white indigo] (2) at (-4, 0) {$0$};
+		\node [style=white indigo] (3) at (2, 0) {$3$};
+		\node [style=white indigo] (4) at (4, 0) {$4$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 1] (2) to (1);
+		\draw [style=new edge style 1] (1) to (0);
+		\draw [style=new edge style 1] (0) to (3);
+		\draw [style=new edge style 1] (3) to (4);
+	\end{pgfonlayer}
+\end{tikzpicture}

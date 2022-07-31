@@ -1,0 +1,279 @@
+\chapter{Appendix B}
+\labelAppendix{appendix_B}
+
+\section{The equivalence of Grover's algorithm with a measurement procedure on a four qubit box graph state}
+\labelSection{grover_equivalence_mbqc}
+
+In section~\refSectionOnly{C2_quantum_search_in_measurement_based_quantum_computing} of ~\refChapterOnly{unstructured_quantum_search}, we conjectured that Grover's algorithm for two qubits is equivalent to a measurement procedure on a four-qubit box graph state shown in~\refFigureOnly{box_graph}, which begins by measuring qubits $0$ and $3$ in basis $B(\alpha)$ and $B(\beta)$ , respectively. Followed by a measurement of qubits $1$ and $2$ in the basis $B(\pi)$.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{yquant}[register/separation=6mm]
+			qubit {$\ket{q_0}=\ket{+}$} q0;
+			qubit {$\ket{q_1}=\ket{+}$} q1;
+
+			box {$Z$} q1 | q0;
+			box {$R_z(\alpha)$} q0;
+			box {$R_z(\beta)$} q1;
+
+			h q0, q1;
+			box {$Z$} q1 | q0;
+			z q0;
+			z q1;
+			h q0, q1;
+
+		measure q0, q1;
+		\end{yquant}
+	\end{tikzpicture}
+	\caption[Effective operations applied to the two remaining qubits after measurement procedure described in ~\protect\refSectionOnly{C2_quantum_search_in_measurement_based_quantum_computing} on a four-qubit box graph state.]{Effective operations applied to the two remaining qubits after measurement procedure described in ~\protect\refSectionOnly{C2_quantum_search_in_measurement_based_quantum_computing} on a four-qubit box graph state when the measurement outcomes on qubit $2$ and $3$ are $m_0=m_3=0$. With an appropriate choice of $\alpha,\beta$, the circuit diagram is equivalent to Grover's algorithm on two qubits.}
+	\labelFigure{grover_equiv}
+\end{figure}
+
+\noindent
+After this measurement procedure, on the remaining qubits, originally in the state $\ket{+}\ket{+}$, we have effectively applied the set of operations shown in the circuit diagram in~\refFigureOnly{grover_equiv}, when the measurement outcomes on qubits $0$ and $3$ are both $m_0 = m_3 = 0$. Namely,
+
+\begin{align}
+\text{CZ}_{01}\hat{H}^{(0)}\otimes\hat{H}^{(1)}\hat{R}^{(0)}_z(\beta)\otimes\hat{R}^{(1)}_z(\alpha)\text{CZ}_{01}\ket{+}_0\ket{+}_1,
+	\labelEquation{circuit_effect}
+\end{align}
+
+\noindent
+all the unitary operations in the above equation can be written in matrix notation as 
+
+\begin{align}
+	\labelEquation{unit_mats}
+	\text{CZ}_{01} &= \mqty(1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 &
+    1 & 0 \\ 0 & 0 & 0 & -1), \nonumber \\
+	\hat{R}^{(0)}_z(\alpha)\otimes\hat{R}^{(1)}_z(\beta) &= \frac{1}{2} \mqty(e^{i(\alpha + \beta)/2} & 0 & 0 & 0 \\
+    0 & e^{i(\alpha - \beta)/2} & 0 & 0 \\
+    0 & 0 & e^{i(\beta - \alpha)/2} & 0 \\ 0 & 0 & 0 & e^{-i(\alpha +\beta)}), \nonumber \\
+	\hat{H}^{(0)}\otimes\hat{H}^{(1)} &= \frac{1}{2}\mqty(1 & 1 & 1 & 1 \\ 1 & -1 & 1 & -1 \\ 1 & 1 & -1 & -1 \\ -1 & -1 & -1 & 1),
+\end{align}
+
+\noindent
+and the state $\ket{+}_0\ket{+}_1$ is written as 
+
+\begin{align}
+    \ket{\psi_0} = \ket{+}_0\ket{+}_1 = \frac{1}{2}\mqty(1 \\ 1 \\ 1 \\ 1).
+\end{align}
+
+\noindent
+Applying the unitary matrices to the state vector $\ket{+}_0\ket{+}_1$, as in~\refEquationOnly{unit_mats}, after some algebraic deadlifting we arrive at the state vector 
+
+\begin{align}
+&= \frac{e^{i(\alpha + \beta)/2}}{4} \mqty(1 + e^{-i\beta} +
+ e^{-i\alpha} - e^{-i(\alpha + \beta)} \\ 1 - e^{-i\beta} +
+ e^{-i\alpha}  + e^{-i(\alpha + \beta)} \\
+ 1 + e^{-i\beta} - e^{-i\alpha} + e^{-i(\alpha + \beta)} \\ -1 + e^{-i\beta} +
+ e^{-i\alpha} + e^{-i(\alpha + \beta)}).
+	\labelEquation{circ_model_vec}
+\end{align}
+
+\bigskip
+\noindent
+The four-qubit box graph state in~\refFigureOnly{box_graph} can be realized by applying controlled-$Z$ gates between the qubits connected by edges as depicted in figure.
+
+\begin{align}
+	&\displaystyle\prod_{(i,j) \in E}\text{CZ}_{ij}\ket{+}_0\ket{+}_1\ket{+}_2\ket{+}_3 , \nonumber \\
+	&= \frac{1}{2}(\ket{0}_1\ket{+}_2\ket{0}_3\ket{+}_4 +
+    \ket{0}_1\ket{-}_2\ket{1}_3\ket{-}_4 \nonumber \\
+    &+ \ket{1}_1\ket{-}_2\ket{0}_3\ket{-}_4 + \ket{1}_1\ket{+}_2\ket{1}_3\ket{+}_4),
+\end{align}
+
+\noindent
+where $CZ_{ij}$ is a controlled-$Z$ gate with a control qubit $i$ and target qubit $j$, and for the graph in~\refFigureOnly{box_graph} $E = \{(0,1), (0,3), (1,3), (3,2)\}$. The projectors that correspond to the measurement basis $B(\alpha)$ are given by 
+
+\begin{align}
+    \Lambda_{\pm \alpha, i} = \ket{\pm \alpha_i}\bra{\pm\alpha_i} = \frac{1}{2}
+    (\ket{0}_i + e^{i\alpha_i}\ket{1}_i)(\bra{0}_i + e^{-i\alpha_i}\bra{1}_i).
+\end{align}
+
+\noindent
+ For algebraic convenience, and without the loss of generality, we will only consider measurement outcome $m_i=0$ corresponding to the projector $\Lambda_{+\alpha, i}$. The measurement procedure begins by first measuring qubit $0$ in the basis $B(\alpha)$. In the case where we obtain the outcome $m_0=0$, the state after the projective measurement is 
+
+\begin{align}
+    \Lambda_{+\alpha, 0} \ket{\psi} &= \frac{1}{4}(\ket{0}_0 + e
+    ^{i\alpha}\ket{1}_0)(\ket{+}_1\ket{0}_2\ket{+}_3 +
+    \ket{-}_1\ket{1}_2)\ket{-}_3 \nonumber \\
+    & + e^{-i\alpha}\ket{-}_1\ket{0}_2\ket{-}_3 +
+    e^{-i\alpha}\ket{+}_1\ket{1}_2\ket{+}_3).
+\end{align}
+
+\noindent
+The above projective measurement is followed by another similar projective measurement in the basis $B(\beta)$ on qubit $3$. In the case where we obtain $m_3=0$ the state after projective measurement  is given by
+
+\begin{align}
+    \Lambda_{+\beta, 3}\Lambda_{+\alpha, 0} \ket{\psi} &=
+    \frac{1}{8}(\ket{0}_0 + e^{i\alpha}\ket{0}_0)(\ket{0}_3 +
+    e^{i\beta}\ket{1}_3)((1 + e^{-i\beta})\ket{+}_1\ket{0}_2 \nonumber \\
+	&+ (1 - e^{-i\beta})\ket{-}_1\ket{1} + (1 - e^{-i\beta})\ket{-}_1\ket{0}_3 \nonumber \\
+	&+ (1 + e^{-i\beta})\ket{+}_1\ket{1}_2).
+	\labelEquation{above}
+\end{align}
+
+\clearpage
+Using vector notation, we can write the expression in~\refEquationOnly{above} as 
+
+\begin{align}
+    \Lambda_{+\beta, 3}\Lambda_{+\alpha, 0} \ket{\psi}  &= \frac{1}{8}
+    \mqty((1+e^{-i\beta}) + (1 - e^{-i\beta})e^{-\beta} \\ (1 +
+    e^{-i\beta})e^{-i\alpha} + 1 (1 - e^{i\beta}) \\ (1+e^{-i\beta})
+    - (1 - e^{-i\beta})e^{-i\alpha} \\ (1 + e^{-i\beta})e^{-i\alpha} -
+    (1 - e^{-\beta})), \nonumber \\
+    &=   \frac{1}{8} \mqty(1 + e^{-i\beta} +
+ e^{-i\alpha} - e^{-i(\alpha + \beta)} \\ 1 - e^{-i\beta} +
+ e^{-i\alpha}  + e^{-i(\alpha + \beta)} \\
+ 1 + e^{-i\beta} - e^{-i\alpha} + e^{-i(\alpha + \beta)} \\ -1 +
+ e^{-i\beta} +
+ e^{-i\alpha} + e^{-i(\alpha + \beta)}).
+\end{align}
+
+\noindent
+Up to normalization and a global phase, the above state vector is equivalent to the state vector in~\refEquationOnly{circ_model_vec} we arrived at \via the circuit diagram in~\refFigureOnly{grover_equiv}.
+
+\bigskip
+\noindent
+If our choice of the angles $\alpha,\beta$ is such that $R_z(\alpha) \otimes R_z(\beta)$ puts a negative sign on the amplitude of $\ket{k_0}\ket{k_1}$, then the action of the byproduct $Z^{m_0}\otimes Z^{m_3}$ due to the measurement outcomes will be such that the negative sign moves to the amplitude of the state $\ket{k_0 \oplus m_0}\ket{k_1 \oplus m_3}$. Thus, depending $m_0$ and $m_3$ on qubits $0$ and $3$, we merely add modulo $2$ the measurement outcome of qubit $1$ to qubit $0$ ($m_0 \oplus m_1$), and of qubit $2$ to qubit $3$ ($m_2 \oplus m_3$), respectively. In this way, we recover Grover's algorithm for the target element originally determined by our choice of the angles $\alpha,\beta$.
+
+\section{Local unitary equivalence class of the four-qubit box graph states through edge local complementation}
+\labelSection{4q_lu_equiv_meas_proc}
+
+Two graph states $\ket{G}, \ket{G'}$  corresponding to the graphs $G=(V,E), G'=(V,E')$ respectively, with the same set of vertices (under a graph isomorphism)\footnote{Two graphs $G$ and $H$ are said to be isomorphic if there exists a bijection between their vertex set i.e $ f: V(G) \mapsto V(H)$ such that when the two vertices share an edge in one graph, the edge is preserved in the new graph (\ie a relabeling of vertices), such an edge-preserving bijection is called an isomorphism. We write $G \cong H$ to denote that $G$ and $H$ are isomorphic.}, \ie $G=(V,E)$ and $G'=(V, E')$, are said to be \acs{LU}-equivalent if there exists a sequence of unitary operators $U_a(G)$ where $a \in V$ such that 
+
+\begin{align}
+	\displaystyle\prod_{\vec{a}} U_a(G)\ket{G} = \ket{G'},
+\end{align}
+
+\noindent
+where $\vec{a}$ is a sequence of vertices in $V$. The unitary transformation $U_a(G)$ is of the form
+
+\begin{align}
+	\labelEquation{local_uni}
+	U_a(G) = \sqrt{i X^{(a)}} \displaystyle\prod_{b \in \eta_{a}} \sqrt{i Z^{(b)}}.
+\end{align}
+
+\noindent
+Here $\eta_{a}$ is the neighborhood of the vertex $b$, $X^{(a)} \text{ and } Z^{(a)}$ are Pauli $X$ and $Z$, respectively, acting on qubit $a$\footnote{For a graph $G=(V,E)$, the neighborhood of a vertex $b \in V$, is the set of all vertices that share an edge with $b$, that is, $\forall a : (a, b) \in E$.}. The above unitary transformation $U_a(G)$ is independently due to Hein~\cite{Hein_2004} and Nest~\cite{Nest_2004}. Through repeated applications of the $U_a(G)$, it is possible to generate an entire \acs{LU}-equivalence class of graph states.
+
+\bigskip
+\noindent
+On the level of graphs, the unitary transformation $U_a(G)$ has a graph theoretic interpretation, that is, applying $U_a(G)$ to $\ket{G}$, the graph $G=(V,E)$ is transformed to another $G'=(V,E')$ such that the set of edges in the new graph is given by 
+
+\begin{align}
+	E' = E \cup E(\eta_a, \eta_a) \setminus E \cap E(\eta_a, \eta_a),
+\end{align}
+
+\noindent
+where $E(\eta_a, \eta_a)$ is the all set of possible edges between the vertices in the neighborhood of $a$, $\cap$ and $\cup$ are the set interpretation and union operators, respectively, and $\setminus$ denotes the set complement operation. Graphically, the transformation $U_a(G)$ adds new edges between the vertices in the neighborhood of vertex $a$ to $E$ ($E \cup E(\eta_a, \eta_a)$), if they are already present, \ie in $E \cap E(\eta_a, \eta_a)$, the said edges are removed from $E$. ($\setminus E \cap E(\eta_a, \eta_a)$), such a transformation in graph theory is called \gls{ELC}~\cite{Bouchet_1993}.
+
+\bigskip
+\noindent
+One advantageous consequence of the above unitary transformation is the following we may wind up in a scenario where we are interested in realizing some quantum protocol which uses a graph state $\ket{G}$, with the underlying graph $G=(V,E)$, as an initial resource state. For the state initialization procedure of a given protocol, we would have to apply $|E|$ controlled-$Z$ gates between the connected qubits $(v,w) \in E$ to the initial state $\ket{+}^{\otimes |V|}$ to get $\ket{G}$. However, if $\ket{G}$ happens to belong to an \acs{LU}-equivalence class, and we may be able to find the equivalence class member $\ket{G'}$ with the least of number of edges in that class, such that $\ket{G} = U\ket{G'}$ for some local unitary operator $U$ (tensor product of Pauli matrices and/or their square roots). Thus, in our new state initialization procedure, we can choose to prepare $\ket{G'}$ instead with $|E'| < |E|$ controlled-$Z$ gates. Such a reduction in controlled-$Z$ gates in practice might be of some appeal and advantage, since two-qubit gates are considered non-trivial and expensive in comparison to local (tensor product of single-qubit gates) unitaries.
+
+\begin{marginfigure}
+	\centering
+    \tikzfig{graphics/LU}
+    \caption[\acs{LU} equivalence of a four-qubit graph state with three edges with the four-qubit box graph state through repeated applications of edge local complementation.]{\acs{LU} equivalence of a four-qubit graph state with three edges connected with the four-qubit box graph state through repeated applications of edge local complementation. The action of an \acs{LU} operation $U_a(G)$ on the level of the graph, for the chosen vertex $a$ (indicated with a dashed outline) leads to an edge created between its neighbors (opaque indigo line) and if it already exists is removed (opaque dashed indigo line).}
+	\labelFigure{4q_lu_equiv}
+\end{marginfigure}
+
+\bigskip
+\noindent
+We now illustrate an example of the scenario described above. The measurement-based equivalent of Grover's algorithm for two qubits can realized on the four-qubit box graph state, which in total has four connections, as we have seen in~\refSectionOnly{C2_quantum_search_in_measurement_based_quantum_computing}. The four-qubit box graph state is \acs{LU}-equivalent (and up to a graph isomorphism) to a four-qubit linear graph state with one less qubit connection. Starting from the latter graph state, by applying local unitaries $U_2(G)$, $U_1(G)$ and $U_2(G)$ on qubits $2, 1$ and $2$, respectively, we end up with a four-qubit graph state that is isomorphic to four-qubit box graph state; this is shown in~\refFigureOnly{4q_lu_equiv}.
+
+\bigskip
+\noindent
+We can find the effective local unitaries that relate the two graph states by successively applying the rule in~\refEquationOnly{local_uni}, to the initial four-qubit linear graph state as depicted in~\refFigureOnly{4q_lu_equiv}. Initially, $U_2(G)$ is given by
+
+\begin{align}
+    \hat{U}_2(G) =  \sqrt{- i X^{(2)}} \displaystyle\prod_{b \in
+    \eta_2} \sqrt{i Z^{(b)}}.
+\end{align}
+
+\noindent
+For the initial graph, the neighbors of vertex $2$ are vertices $1$ and $3$. Thus, the above expression for $U_2(G_0)$ becomes
+
+\begin{align}
+    \hat{U}_2(G_0) =  \mathds{1}^{(0)}\otimes\sqrt{i Z^{(1)}}\otimes\sqrt{i Z^{(2)}}\otimes\sqrt{-i X^{(3)}}.
+\end{align}
+
+\noindent
+The action of $U_2(G_0)$ transforms $G_0$ to new a graph $G_1$, which has an edge between qubits $1$ and $3$. For the new graph state $\ket{G_1}$, the local unitary $U_1(G_1)$ that follows is given by
+
+
+\begin{align}
+    \hat{U}_1(G_1) = \sqrt{-i X^{(1)}}\displaystyle\prod_{b \in \eta_1}
+    \sqrt{i Z^{(b)}}.
+\end{align}
+
+\noindent
+In $G_1$, the neighbors of vertex $1$ are vertices $0,2$ and $3$. Hence, we have
+
+\begin{align}
+    \hat{U}_1(G_1) = \sqrt{i Z^{(0)}} \otimes \sqrt{-i X^{(1)}} \otimes \sqrt{i Z^{(2)}} \otimes \sqrt{i Z^{(3)}}.
+\end{align}
+
+\noindent
+From which, the resultant new graph $G_2$ has new edges $(0,3)$ and $(0,1)$, and the edge between $(2,3)$ is removed. Lastly, we consider the local unitary $U_2(G_2)$ on the new graph $G_2$
+
+\begin{align}
+    \hat{U}_2(G_2) \sqrt{-i X^{(2)}} \displaystyle\prod_{b \in
+    \eta_2} \sqrt{i Z^{(b)}},
+\end{align}
+
+\noindent
+where the neighbors of the vertex $2$ are now the vertices $0$ and $1$.
+
+\begin{align}
+    \hat{U}_2(G_2) = \sqrt{i Z^{(0)}} \otimes \sqrt{i Z^{(1)}} \otimes \sqrt{-i X^{(2)}} \otimes \mathds{1}^{(3)}.
+\end{align}
+
+\noindent
+The action of $U_2(G_2)$ is to remove the edge $(0,1)$ to give the new graph $G_3$. Looking at~\refFigureOnly{4q_lu_equiv}, the graph $G_3$ under the following isomorphism
+
+\begin{align}
+    f(1) = 2,  \nonumber \\
+    f(2) = 1, \nonumber \\
+    f(3) = 3, \nonumber \\
+    f(0) = 0,
+\end{align}
+
+\noindent
+is equivalent to the four-qubit box graph state~\refFigureOnly{box_graph}. Tallying up the all local unitaries and using the identities~\cite{Soeken_2013}:
+
+\begin{align}
+	\sqrt{X} = e^{i\pi/4} R_x(\pi/2), \nonumber \\
+	\sqrt{Z} = e^{i\pi/4} R_z(\pi/2).
+\end{align}
+
+\noindent
+The full unitary operation is then given by
+
+\begin{align}
+	U_2(G_0)U_1(G_1)U_2(G_2) &= i U^{(0)}\otimes U^{(1)} \otimes U^{(2)} \otimes U^{(3)}, \nonumber \\ 
+	U^{(0)} &= R^{(0)}_z(\pi), \nonumber \\
+	U^{(1)} &= R^{(1)}_z(\pi/2) R^{(1)}_x(\pi/2) R^{(1)}_z(\pi/2), \nonumber \\
+	U^{(2)} &= R^{(2)}_x(\pi/2)R^{(2)}_z(\pi), \nonumber \\
+	U^{(3)} &= R^{(3)}_z(\pi/2)R^{(3)}_x(\pi/2).
+\end{align}
+
+\clearpage
+
+\section{Edge local complementation equivalence class of a graph state realizing a measurement-based controlled-controlled-Z gate}
+\labelSection{10q_elc_orbit}
+
+Starting from the ten-qubit graph state in~\refFigureOnly{10q_graph_state} that realizes the measurement-based controlled-controlled-$Z$ gate with an appropriate choice of measurements as described in~\refSectionOnly{C2_quantum_search_in_measurement_based_quantum_computing}. By repeated applications of the \acs{ELC} rule, which results in the local unitaries of the form in~\refEquationOnly{local_uni}; using the graph-state compass program~\cite{Sammorley_2019} from Ref.~\cite{Adcock_2020} we expand the equivalence class to which the aforesaid graph state belongs. The representative members of this equivalence class are shown in~\refFigureOnly{10q_graph_state_equiv}; in the equivalence class, the member with the least number of edges is the original ten-qubit graph state.
+
+\begin{figure}[h]
+	\foreach \x in {1,...,108}
+		{
+			\begin{minipage}{0.1\linewidth}
+				\includegraphics[width=\linewidth]{orbit/graph_n=\x.pdf}
+			\end{minipage} 
+			\vspace{0.06ex}
+		}
+	\labelFigure{equiv_class_toff}
+	\caption[An equivalence class of ten-qubit graph states that realize a controlled-controlled-$Z$ gate.]{An equivalence class of ten-qubit graph states that performs a controlled-controlled-$Z$ gate with an appropriate choice of measurements as described in~\protect\refSectionOnly{C2_quantum_search_in_measurement_based_quantum_computing}.}
+	\labelFigure{10q_graph_state_equiv}
+\end{figure}
